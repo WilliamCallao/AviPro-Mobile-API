@@ -1,0 +1,12 @@
+[
+    {
+        "empresa_id":1,
+        "nombre":"Empresa 1",
+        "email":"ltdaAvi@gmail.com"
+    },
+    {
+        "empresa_id":2,
+        "nombre":"Empresa 2",
+        "email":"ArtePlas@gmail.com"
+    }
+]

@@ -3,11 +3,11 @@ const router = express.Router();
 const NotaPendiente = require('../models/notaPendiente');
 
 // Obtener notas pendientes por ID de empresa
-router.get('/notas_pendientes/empresa/:Empresa_ID', async (req, res) => {
-  const Empresa_ID = req.params.Empresa_ID;
+router.get('/notas_pendientes/empresa/:empresa_id', async (req, res) => {
+  const empresa_id = req.params.empresa_id;
   try {
     const notasPendientes = await NotaPendiente.findAll({
-      where: { Empresa_ID }
+      where: { empresa_id }
     });
     res.json(notasPendientes);
   } catch (error) {
@@ -19,8 +19,8 @@ router.get('/notas_pendientes/empresa/:Empresa_ID', async (req, res) => {
 // Crear una nueva nota pendiente
 router.post('/notas_pendientes', async (req, res) => {
   try {
-    const { Saldo_pendiente, nro_nota, Monto_pagado, importe_nota, Fecha_venta, Fecha_vence, Empresa_ID, Fecha, sucursal_ID, Cuenta } = req.body;
-    const nuevaNotaPendiente = await NotaPendiente.create({ Saldo_pendiente, nro_nota, Monto_pagado, importe_nota, Fecha_venta, Fecha_vence, Empresa_ID, Fecha, sucursal_ID, Cuenta });
+    const { Saldo_pendiente, nro_nota, Monto_pagado, Importe_nota, Fecha_venta, Fecha_vence, empresa_id, Fecha, sucursal_id, Cuenta } = req.body;
+    const nuevaNotaPendiente = await NotaPendiente.create({ Saldo_pendiente, nro_nota, Monto_pagado, Importe_nota, Fecha_venta, Fecha_vence, empresa_id, Fecha, sucursal_id, Cuenta });
     res.status(201).json(nuevaNotaPendiente);
   } catch (error) {
     console.error(error);
@@ -48,8 +48,8 @@ router.get('/notas_pendientes/:nro_nota', async (req, res) => {
 router.put('/notas_pendientes/:nro_nota', async (req, res) => {
   const nro_nota = req.params.nro_nota;
   try {
-    const { Saldo_pendiente, Monto_pagado, importe_nota, Fecha_venta, Fecha_vence, Empresa_ID, Fecha, sucursal_ID, Cuenta } = req.body;
-    const updatedNotaPendiente = await NotaPendiente.update({ Saldo_pendiente, Monto_pagado, importe_nota, Fecha_venta, Fecha_vence, Empresa_ID, Fecha, sucursal_ID, Cuenta }, {
+    const { Saldo_pendiente, Monto_pagado, Importe_nota, Fecha_venta, Fecha_vence, empresa_id, Fecha, sucursal_id, Cuenta } = req.body;
+    const updatedNotaPendiente = await NotaPendiente.update({ Saldo_pendiente, Monto_pagado, Importe_nota, Fecha_venta, Fecha_vence, empresa_id, Fecha, sucursal_id, Cuenta }, {
       where: { nro_nota },
       returning: true
     });

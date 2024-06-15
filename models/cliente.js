@@ -2,26 +2,26 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../configs/database');
 
 const Cliente = sequelize.define('Cliente', {
-  cliente_ID: {
+  cliente_id: {
     type: DataTypes.STRING,
     allowNull: false,
     primaryKey: true,
-    field: 'cliente_ID'
+    field: 'cliente_id'
   },
-  sucursal_ID: {
+  sucursal_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'sucursal_ID'
+    field: 'sucursal_id'
   },
   Telefono: {
     type: DataTypes.STRING,
     allowNull: true,
     field: 'Telefono'
   },
-  Empresa_ID: {
+  empresa_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'Empresa_ID'
+    field: 'empresa_id'
   },
   Direccion: {
     type: DataTypes.STRING,
@@ -33,10 +33,10 @@ const Cliente = sequelize.define('Cliente', {
     allowNull: false,
     field: 'Nombre'
   },
-  cobrador_ID: {
+  cobrador_id: {
     type: DataTypes.STRING,
     allowNull: true,
-    field: 'cobrador_ID'
+    field: 'cobrador_id'
   },
   Cuenta: {
     type: DataTypes.STRING,

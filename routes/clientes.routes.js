@@ -16,8 +16,8 @@ router.get('/clientes', async (req, res) => {
 // Crear un nuevo cliente
 router.post('/clientes', async (req, res) => {
   try {
-    const { cliente_ID, sucursal_ID, Telefono, Empresa_ID, Direccion, Nombre, cobrador_ID, Cuenta } = req.body;
-    const nuevoCliente = await Cliente.create({ cliente_ID, sucursal_ID, Telefono, Empresa_ID, Direccion, Nombre, cobrador_ID, Cuenta });
+    const { cliente_id, sucursal_id, Telefono, empresa_id, Direccion, Nombre, cobrador_id, Cuenta } = req.body;
+    const nuevoCliente = await Cliente.create({ cliente_id, sucursal_id, Telefono, empresa_id, Direccion, Nombre, cobrador_id, Cuenta });
     res.status(201).json(nuevoCliente);
   } catch (error) {
     console.error(error);
@@ -26,10 +26,10 @@ router.post('/clientes', async (req, res) => {
 });
 
 // Obtener un cliente por ID
-router.get('/clientes/:cliente_ID', async (req, res) => {
-  const cliente_ID = req.params.cliente_ID;
+router.get('/clientes/:cliente_id', async (req, res) => {
+  const cliente_id = req.params.cliente_id;
   try {
-    const cliente = await Cliente.findByPk(cliente_ID);
+    const cliente = await Cliente.findByPk(cliente_id);
     if (!cliente) {
       res.status(404).json({ message: 'Cliente no encontrado' });
     } else {
@@ -42,12 +42,12 @@ router.get('/clientes/:cliente_ID', async (req, res) => {
 });
 
 // Actualizar un cliente por ID
-router.put('/clientes/:cliente_ID', async (req, res) => {
-  const cliente_ID = req.params.cliente_ID;
+router.put('/clientes/:cliente_id', async (req, res) => {
+  const cliente_id = req.params.cliente_id;
   try {
-    const { sucursal_ID, Telefono, Empresa_ID, Direccion, Nombre, cobrador_ID, Cuenta } = req.body;
-    const updatedCliente = await Cliente.update({ sucursal_ID, Telefono, Empresa_ID, Direccion, Nombre, cobrador_ID, Cuenta }, {
-      where: { cliente_ID },
+    const { sucursal_id, Telefono, empresa_id, Direccion, Nombre, cobrador_id, Cuenta } = req.body;
+    const updatedCliente = await Cliente.update({ sucursal_id, Telefono, empresa_id, Direccion, Nombre, cobrador_id, Cuenta }, {
+      where: { cliente_id },
       returning: true
     });
     if (updatedCliente[0] === 0) {
@@ -62,10 +62,10 @@ router.put('/clientes/:cliente_ID', async (req, res) => {
 });
 
 // Eliminar un cliente por ID
-router.delete('/clientes/:cliente_ID', async (req, res) => {
-  const cliente_ID = req.params.cliente_ID;
+router.delete('/clientes/:cliente_id', async (req, res) => {
+  const cliente_id = req.params.cliente_id;
   try {
-    const deletedCliente = await Cliente.destroy({ where: { cliente_ID } });
+    const deletedCliente = await Cliente.destroy({ where: { cliente_id } });
     if (deletedCliente === 0) {
       res.status(404).json({ message: 'Cliente no encontrado' });
     } else {

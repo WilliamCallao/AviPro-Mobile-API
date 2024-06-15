@@ -1,0 +1,32 @@
+[
+    {
+        "email": "oficinacentral@gmail.com",
+        "empresa_id": 1,
+        "cobrador_id": "01",
+        "nombre": "OFICINA CENTRAL CBBA"
+    },
+    {
+        "email": "mariomamani@gmail.com",
+        "empresa_id": 1,
+        "cobrador_id": "04",
+        "nombre": "ING. MARIO MAMANI"
+    },
+    {
+        "email": "padillayhina@gmail.com",
+        "empresa_id": 1,
+        "cobrador_id": "0L",
+        "nombre": "DRA. YHINA L. PADILLA"
+    },
+    {
+        "email": "vasquez@gmail.com",
+        "empresa_id": 2,
+        "cobrador_id": "02",
+        "nombre": "DR. FAVIO A. VASQUEZ FORERO"
+    },
+    {
+        "email": "fagundes@gmail.com",
+        "empresa_id": 2,
+        "cobrador_id": "03",
+        "nombre": "DR. MARCO FAGUNDES"
+    }
+]

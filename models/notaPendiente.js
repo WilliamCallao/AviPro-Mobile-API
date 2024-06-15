@@ -18,10 +18,10 @@ const NotaPendiente = sequelize.define('NotaPendiente', {
     allowNull: true,
     field: 'Monto_pagado'
   },
-  importe_nota: {
+  Importe_nota: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
-    field: 'importe_nota'
+    field: 'Importe_nota'
   },
   Fecha_venta: {
     type: DataTypes.DATE,
@@ -33,20 +33,20 @@ const NotaPendiente = sequelize.define('NotaPendiente', {
     allowNull: false,
     field: 'Fecha_vence'
   },
-  Empresa_ID: {
+  empresa_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'Empresa_ID'
+    field: 'empresa_id'
   },
   Fecha: {
     type: DataTypes.DATE,
     allowNull: false,
     field: 'Fecha'
   },
-  sucursal_ID: {
+  sucursal_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'sucursal_ID'
+    field: 'sucursal_id'
   },
   Cuenta: {
     type: DataTypes.STRING,

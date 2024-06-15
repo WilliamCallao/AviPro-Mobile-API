@@ -8,32 +8,32 @@ router.get('/empresa/:empresaId/clientes', async (req, res) => {
   const { empresaId } = req.params;
   try {
     const clientes = await Cliente.findAll({
-      where: { Empresa_ID: empresaId },
+      where: { empresa_id: empresaId },
       include: [{
         model: NotaPendiente,
         as: 'NotasPendientes',
         where: {
-          Empresa_ID: empresaId
+          empresa_id: empresaId
         },
         required: false
       }]
     });
     const clientesMap = clientes.map(cliente => ({
-      Empresa_ID: cliente.Empresa_ID,
-      sucursal_ID: cliente.sucursal_ID,
-      cliente_ID: cliente.cliente_ID,
+      empresa_id: cliente.empresa_id,
+      sucursal_id: cliente.sucursal_id,
+      cliente_id: cliente.cliente_id,
       Cuenta: cliente.Cuenta,
       Nombre: cliente.Nombre,
       Direccion: cliente.Direccion,
       Telefono: cliente.Telefono,
-      cobrador_ID: cliente.cobrador_ID,
+      cobrador_id: cliente.cobrador_id,
       NotasPendientes: cliente.NotasPendientes.map(nota => ({
-        Empresa_ID: nota.Empresa_ID,
-        sucursal_ID: nota.sucursal_ID,
+        empresa_id: nota.empresa_id,
+        sucursal_id: nota.sucursal_id,
         Cuenta: nota.Cuenta,
         Fecha: nota.Fecha,
         nro_nota: nota.nro_nota,
-        importe_nota: nota.importe_nota,
+        Importe_nota: nota.Importe_nota,
         Monto_pagado: nota.Monto_pagado,
         Saldo_pendiente: nota.Saldo_pendiente,
         Fecha_venta: nota.Fecha_venta,
