@@ -1,0 +1,102 @@
+[
+    {
+        "cliente_id": "08Z",
+        "sucursal_id": 2,
+        "telefono": "4240747",
+        "empresa_id": 1,
+        "direccion": "COLORADOS # 80",
+        "nombre": "ARANA DAZA MARIO HUMBERTO",
+        "cobrador_id": "01",
+        "cuenta": "11201010212"
+    },
+    {
+        "cliente_id": "0N6",
+        "sucursal_id": 2,
+        "telefono": null,
+        "empresa_id": 1,
+        "direccion": null,
+        "nombre": "ALVAREZ MOSCOSO FREDDY",
+        "cobrador_id": "0L",
+        "cuenta": "1120102E004"
+    },
+    {
+        "cliente_id": "0LF",
+        "sucursal_id": 1,
+        "telefono": null,
+        "empresa_id": 1,
+        "direccion": null,
+        "nombre": "KLASSEN HAMM DAVID",
+        "cobrador_id": "0L",
+        "cuenta": "11201020427"
+    },
+    {
+        "cliente_id": "0K3",
+        "sucursal_id": 2,
+        "telefono": "3-476161",
+        "empresa_id": 1,
+        "direccion": "4to anillo Guaracahi",
+        "nombre": "ANGLARILL SERRATE RICARDO",
+        "cobrador_id": "04",
+        "cuenta": "112010290020002"
+    },
+    {
+        "cliente_id": "0MY",
+        "sucursal_id": 1,
+        "telefono": null,
+        "empresa_id": 1,
+        "direccion": "Zona Sud Itocta s/n",
+        "nombre": "COCA HENRRY",
+        "cobrador_id": "04",
+        "cuenta": "11201010470"
+    },
+    {
+        "cliente_id": "0CX",
+        "sucursal_id": 2,
+        "telefono": null,
+        "empresa_id": 2,
+        "direccion": null,
+        "nombre": "TORRICO CARLA",
+        "cobrador_id": "02",
+        "cuenta": "11201020241"
+    },
+    {
+        "cliente_id": "0CI",
+        "sucursal_id": 1,
+        "telefono": "9347065-78461359",
+        "empresa_id": 2,
+        "direccion": "COLONIA JAPONESA SAN JUAN",
+        "nombre": "CAISY LTDA.",
+        "cobrador_id": "02",
+        "cuenta": "11201025001"
+    },
+    {
+        "cliente_id": "0N1",
+        "sucursal_id": 1,
+        "telefono": null,
+        "empresa_id": 2,
+        "direccion": "ZONA ANOCARAINE OESTE VINTO QUILLACOLLO",
+        "nombre": "SALAZAR ANTEZANA CLAUDIA ALEJANDRA",
+        "cobrador_id": "03",
+        "cuenta": "11201010471"
+    },
+    {
+        "cliente_id": "0M2",
+        "sucursal_id": 1,
+        "telefono": null,
+        "empresa_id": 2,
+        "direccion": null,
+        "nombre": "MENDOZA JULIO",
+        "cobrador_id": "02",
+        "cuenta": "11201010457"
+    },
+    {
+        "cliente_id": "0KP",
+        "sucursal_id": 2,
+        "telefono": "77445956",
+        "empresa_id": 2,
+        "direccion": "SACABA KM 10",
+        "nombre": "LEDEZMA PEREDO DANIEL",
+        "cobrador_id": "03",
+        "cuenta": "11201011003"
+    }
+]
