@@ -1,9 +1,6 @@
 # Usa una imagen base de Node.js
 FROM node:22
 
-# Habilitar pnpm
-RUN corepack enable pnpm
-
 # Establece el directorio de trabajo
 WORKDIR /usr/src/app
 
@@ -11,13 +8,16 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Instala las dependencias
-RUN pnpm install
+RUN npm install
 
 # Copia el resto de los archivos de la aplicación
 COPY . .
+
+# Instala nodemon globalmente
+RUN npm install -g nodemon
 
 # Expone el puerto de la aplicación
 EXPOSE 3000
 
 # Comando para iniciar la aplicación
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]

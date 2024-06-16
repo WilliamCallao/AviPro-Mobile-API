@@ -26,12 +26,14 @@ services:
     networks:
       - avi-pro_network
     environment:
-      DB_HOST: ${DB_HOST}
+      DB_HOST: db
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
-      DB_PORT: ${DB_PORT}
-      PORT: ${PORT}
+      DB_PORT: 3306
+      PORT: 3000
+    volumes:
+      - .:/usr/src/app
 
 volumes:
   db_data:
