@@ -1,6 +1,6 @@
 // notasPendientesDesktop
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../configs/database');
+const sequelize = require('../../configs/database'); // Asegúrate de que esta ruta sea correcta
 
 const NotaPendienteDesktop = sequelize.define('NotaPendienteDesktop', {
   empresa_id: {
