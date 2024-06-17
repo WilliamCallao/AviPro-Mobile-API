@@ -7,7 +7,7 @@ const CobradorDesktop = sequelize.define('CobradorDesktop', {
     allowNull: false
   },
   empresa_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.CHAR(2),
     allowNull: false
   },
   cobrador_id: {
@@ -16,11 +16,11 @@ const CobradorDesktop = sequelize.define('CobradorDesktop', {
     primaryKey: true
   },
   nombre: {
-    type: DataTypes.STRING,
+    type: DataTypes.CHAR(50),
     allowNull: false
   }
 }, {
-  tableName: 'datos_cobradores',
+  tableName: 'desktop_cobradores',
   timestamps: false
 });
 

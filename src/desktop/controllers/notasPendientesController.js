@@ -1,5 +1,4 @@
 const NotaPendienteDesktop = require('../models/notasPendientesDesktop');
-const testData = require('./notasPendientesTestData.json'); // Asegúrate de que esta ruta sea correcta
 
 // Obtener todas las notas pendientes de escritorio
 const getNotasPendientesDesktop = async (req, res) => {
@@ -22,19 +21,20 @@ const addNotaPendiente = async (req, res) => {
   }
 };
 
-// Cargar datos de prueba
-const loadTestData = async (req, res) => {
+// Cargar datos desde un archivo JSON
+const uploadJsonData = async (req, res) => {
+  const notas = req.body;
   try {
     await NotaPendienteDesktop.destroy({ where: {} }); // Borra todos los registros existentes
-    const newNotas = await NotaPendienteDesktop.bulkCreate(testData); // Carga los nuevos datos desde el JSON
+    const newNotas = await NotaPendienteDesktop.bulkCreate(notas); // Carga los nuevos datos desde el JSON
     res.status(201).json(newNotas);
   } catch (error) {
-    res.status(500).send('Error loading test data');
+    res.status(500).send('Error loading JSON data');
   }
 };
 
 module.exports = {
   getNotasPendientesDesktop,
   addNotaPendiente,
-  loadTestData
+  uploadJsonData
 };

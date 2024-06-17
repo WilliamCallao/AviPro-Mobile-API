@@ -44,7 +44,7 @@ const NotaPendienteDesktop = sequelize.define('NotaPendienteDesktop', {
     allowNull: true
   }
 }, {
-  tableName: 'notas_pendientes_desktop',
+  tableName: 'desktop_notas_pendientes',
   timestamps: false
 });
 

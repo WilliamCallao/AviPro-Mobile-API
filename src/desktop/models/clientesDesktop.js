@@ -25,19 +25,19 @@ const ClienteDesktop = sequelize.define('ClienteDesktop', {
     allowNull: false
   },
   direccion: {
-    type: DataTypes.CHAR(100),
+    type: DataTypes.CHAR(40),
     allowNull: true
   },
   telefono: {
-    type: DataTypes.CHAR(50),
+    type: DataTypes.CHAR(30),
     allowNull: true
   },
   cobrador_id: {
-    type: DataTypes.CHAR(3),
+    type: DataTypes.CHAR(2),
     allowNull: false
   }
 }, {
-  tableName: 'clientes_desktop',
+  tableName: 'desktop_clientes',
   timestamps: false
 });
 

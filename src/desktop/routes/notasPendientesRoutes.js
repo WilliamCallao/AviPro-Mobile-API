@@ -2,13 +2,13 @@ const express = require('express');
 const {
   getNotasPendientesDesktop,
   addNotaPendiente,
-  loadTestData
+  uploadJsonData
 } = require('../controllers/notasPendientesController');
 
 const router = express.Router();
 
 router.get('/', getNotasPendientesDesktop);
 router.post('/', addNotaPendiente);
-router.post('/load-test-data', loadTestData); // Nueva ruta para cargar datos de prueba
+router.post('/upload-json', uploadJsonData); // Nueva ruta para cargar datos desde JSON
 
 module.exports = router;
