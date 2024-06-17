@@ -2,13 +2,13 @@ const express = require('express');
 const {
   getClientesDesktop,
   addCliente,
-  loadTestData
+  uploadJsonData
 } = require('../controllers/clientesController');
 
 const router = express.Router();
 
 router.get('/', getClientesDesktop);
 router.post('/', addCliente);
-router.post('/load-test-data', loadTestData);
+router.post('/upload-json', uploadJsonData);
 
 module.exports = router;

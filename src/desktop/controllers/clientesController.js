@@ -1,5 +1,4 @@
 const ClienteDesktop = require('../models/clientesDesktop');
-const testData = require('./clientesTestData.json');
 
 // Obtener todos los clientes de escritorio
 const getClientesDesktop = async (req, res) => {
@@ -22,19 +21,20 @@ const addCliente = async (req, res) => {
   }
 };
 
-// Cargar datos de prueba
-const loadTestData = async (req, res) => {
+// Cargar datos desde un archivo JSON
+const uploadJsonData = async (req, res) => {
+  const clients = req.body;
   try {
     await ClienteDesktop.destroy({ where: {} }); // Borra todos los registros existentes
-    const newClientes = await ClienteDesktop.bulkCreate(testData); // Carga los nuevos datos desde el JSON
+    const newClientes = await ClienteDesktop.bulkCreate(clients); // Carga los nuevos datos desde el JSON
     res.status(201).json(newClientes);
   } catch (error) {
-    res.status(500).send('Error loading test data');
+    res.status(500).send('Error loading JSON data');
   }
 };
 
 module.exports = {
   getClientesDesktop,
   addCliente,
-  loadTestData
+  uploadJsonData
 };
