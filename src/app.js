@@ -3,6 +3,7 @@ const cors = require('cors');
 const sequelize = require('./configs/database');
 const desktopClientesRoutes = require('./desktop/routes/clientesRoutes');
 const desktopNotasPendientesRoutes = require('./desktop/routes/notasPendientesRoutes');
+const desktopCobradoresRoutes = require('./desktop/routes/cobradoresRoutes');
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 app.use('/api/desktop/clientes', desktopClientesRoutes);
 app.use('/api/desktop/notas-pendientes', desktopNotasPendientesRoutes);
+app.use('/api/desktop/cobradores', desktopCobradoresRoutes);
 
 app.get('/', (req, res) => {
   res.send('Servidor en funcionamiento');
