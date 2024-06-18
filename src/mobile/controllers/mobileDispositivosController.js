@@ -26,6 +26,12 @@ const addDispositivo = async (req, res) => {
       return res.status(400).json({ error: 'empresa_id, codigo_id y estado son requeridos' });
     }
 
+    // Validar existencia de la empresa
+    const empresa = await MobileEmpresa.findByPk(empresa_id);
+    if (!empresa) {
+      return res.status(400).json({ error: 'empresa_id no existe' });
+    }
+
     // Validar unicidad del codigo_id
     const existingDevice = await MobileDispositivo.findByPk(codigo_id);
     if (existingDevice) {
@@ -47,8 +53,7 @@ const updateEstadoUsado = async (req, res) => {
     const dispositivo = await MobileDispositivo.findByPk(codigo_id);
     if (dispositivo) {
       dispositivo.estado = 'usado';
-      dispositivo.ultimo_uso = new Date();
-      await dispositivo.save();
+      await dispositivo.save({ fields: ['estado'] });
       res.json(dispositivo);
     } else {
       res.status(404).send('Device not found');
@@ -65,7 +70,7 @@ const updateEstadoDesactivado = async (req, res) => {
     const dispositivo = await MobileDispositivo.findByPk(codigo_id);
     if (dispositivo) {
       dispositivo.estado = 'desactivado';
-      await dispositivo.save();
+      await dispositivo.save({ fields: ['estado'] });
       res.json(dispositivo);
     } else {
       res.status(404).send('Device not found');
@@ -82,8 +87,7 @@ const updateEstadoCreado = async (req, res) => {
     const dispositivo = await MobileDispositivo.findByPk(codigo_id);
     if (dispositivo) {
       dispositivo.estado = 'creado';
-      dispositivo.ultimo_uso = null;
-      await dispositivo.save();
+      await dispositivo.save({ fields: ['estado'] });
       res.json(dispositivo);
     } else {
       res.status(404).send('Device not found');
@@ -100,3 +104,4 @@ module.exports = {
   updateEstadoDesactivado,
   updateEstadoCreado
 };
+  
