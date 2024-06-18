@@ -1,0 +1,33 @@
+[
+    {
+      "empresa_id": "02",
+      "cuenta": "11201025001",
+      "descripcion": "FIE.CTA 6-8918",
+      "tipo": "E"
+    },
+    {
+      "empresa_id": "02",
+      "cuenta": "11201010471",
+      "descripcion": "FIE.CTA 6-8918",
+      "tipo": "E"
+    },
+    {
+      "empresa_id": "01",
+      "cuenta": "11201010212",
+      "descripcion": "B.UNION.CTA 8-832",
+      "tipo": "B"
+    },
+    {
+      "empresa_id": "01",
+      "cuenta": "1120102E004",
+      "descripcion": "B.UNION.CTA 8-832",
+      "tipo": "E"
+    },
+    {
+      "empresa_id": "01",
+      "cuenta": "11201020427",
+      "descripcion": "FIE.CTA 6-832",
+      "tipo": "E"
+    }
+  ]
+  

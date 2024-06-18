@@ -1,5 +1,4 @@
 const CobradorDesktop = require('../models/cobradoresDesktop');
-const testData = require('./cobradoresTestData.json');
 
 // Obtener todos los cobradores de escritorio
 const getCobradoresDesktop = async (req, res) => {
@@ -22,19 +21,20 @@ const addCobrador = async (req, res) => {
   }
 };
 
-// Cargar datos de prueba
-const loadTestData = async (req, res) => {
+// Cargar datos desde un archivo JSON
+const uploadJsonData = async (req, res) => {
+  const cobradores = req.body;
   try {
     await CobradorDesktop.destroy({ where: {} }); // Borra todos los registros existentes
-    const newCobradores = await CobradorDesktop.bulkCreate(testData); // Carga los nuevos datos desde el JSON
+    const newCobradores = await CobradorDesktop.bulkCreate(cobradores); // Carga los nuevos datos desde el JSON
     res.status(201).json(newCobradores);
   } catch (error) {
-    res.status(500).send('Error loading test data');
+    res.status(500).send('Error loading JSON data');
   }
 };
 
 module.exports = {
   getCobradoresDesktop,
   addCobrador,
-  loadTestData
+  uploadJsonData
 };

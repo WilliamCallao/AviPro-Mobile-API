@@ -20,7 +20,7 @@ const NotasCobradasDesktop = sequelize.define('NotasCobradasDesktop', {
   },
   referencia: {
     type: DataTypes.CHAR(9),
-    allowNull: false
+    allowNull: true
   },
   pago_a_nota: {
     type: DataTypes.CHAR(15),
@@ -34,14 +34,14 @@ const NotasCobradasDesktop = sequelize.define('NotasCobradasDesktop', {
     type: DataTypes.CHAR(1),
     allowNull: false,
     validate: {
-      isIn: [['B', 'U']] // B para Bolivianos, U para Dólares
+      isIn: [['B', 'U']]
     }
   },
   modo_pago: {
     type: DataTypes.CHAR(1),
     allowNull: false,
     validate: {
-      isIn: [['E', 'B', 'D']] // E para Efectivo, B para Banco, D para Descuento
+      isIn: [['E', 'B', 'D']]
     }
   },
   cta_deposito: {
@@ -50,7 +50,7 @@ const NotasCobradasDesktop = sequelize.define('NotasCobradasDesktop', {
   },
   observaciones: {
     type: DataTypes.CHAR(45),
-    allowNull: true
+    allowNull: true  // Ya estaba configurado para permitir null
   },
   nro_factura: {
     type: DataTypes.DECIMAL(15, 0),
