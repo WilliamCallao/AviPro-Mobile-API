@@ -23,6 +23,10 @@ app.use('/api/desktop/notas-cobradas', desktopNotasCobradasRoutes);
 app.use('/api/mobile/empresas', mobileEmpresaRoutes);
 app.use('/api/mobile/dispositivos', mobileDispositivosRoutes);
 
+app.get('/api/saludo', (req, res) => {
+  res.send('Hola');
+});
+
 app.get('/', (req, res) => {
   res.send('Servidor en funcionamiento');
 });
