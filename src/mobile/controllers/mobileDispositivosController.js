@@ -26,11 +26,11 @@ const addDispositivo = async (req, res) => {
       return res.status(400).json({ error: 'empresa_id, codigo_id y estado son requeridos' });
     }
 
-    // Validar existencia de la empresa
-    const empresa = await MobileEmpresa.findByPk(empresa_id);
-    if (!empresa) {
-      return res.status(400).json({ error: 'empresa_id no existe' });
-    }
+    // // Validar existencia de la empresa
+    // const empresa = await MobileEmpresa.findByPk(empresa_id);
+    // if (!empresa) {
+    //   return res.status(400).json({ error: 'empresa_id no existe' });
+    // }
 
     // Validar unicidad del codigo_id
     const existingDevice = await MobileDispositivo.findByPk(codigo_id);
