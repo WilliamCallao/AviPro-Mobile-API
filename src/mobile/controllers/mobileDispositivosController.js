@@ -1,4 +1,3 @@
-// controllers/mobileDispositivosController.js
 const { Op } = require('sequelize');
 const MobileDispositivo = require('../models/mobileDispositivos');
 
@@ -97,11 +96,28 @@ const updateEstadoCreado = async (req, res) => {
   }
 };
 
+const updateUltimoUso = async (req, res) => {
+  try {
+    const { codigo_id } = req.params;
+    console.log("RECIBIDO",codigo_id)
+    const dispositivo = await MobileDispositivo.findByPk(codigo_id);
+    if (dispositivo) {
+      dispositivo.ultimo_uso = new Date();
+      await dispositivo.save({ fields: ['ultimo_uso'] });
+      res.json(dispositivo);
+    } else {
+      res.status(404).send('Device not found');
+    }
+  } catch (error) {
+    res.status(500).send('Error updating last used timestamp');
+  }
+};
+
 module.exports = {
   getDispositivos,
   addDispositivo,
   updateEstadoUsado,
   updateEstadoDesactivado,
-  updateEstadoCreado
+  updateEstadoCreado,
+  updateUltimoUso
 };
-  
