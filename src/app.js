@@ -24,6 +24,7 @@ app.use('/api/mobile/empresas', mobileEmpresaRoutes);
 app.use('/api/mobile/dispositivos', mobileDispositivosRoutes);
 
 app.get('/api/saludo', (req, res) => {
+  console.log(`saludando`);
   res.send('Hola');
 });
 

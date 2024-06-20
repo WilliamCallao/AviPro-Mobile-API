@@ -51,9 +51,15 @@ const updateEstadoUsado = async (req, res) => {
     const { codigo_id } = req.params;
     const dispositivo = await MobileDispositivo.findByPk(codigo_id);
     if (dispositivo) {
-      dispositivo.estado = 'usado';
-      await dispositivo.save({ fields: ['estado'] });
-      res.json(dispositivo);
+      if (dispositivo.estado === 'creado') {
+        dispositivo.estado = 'usado';
+        await dispositivo.save({ fields: ['estado'] });
+        res.json({ message: 'El código fue activado correctamente', dispositivo });
+      } else if (dispositivo.estado === 'usado') {
+        res.json({ message: 'El código ya fue usado', dispositivo });
+      } else if (dispositivo.estado === 'desactivado') {
+        res.json({ message: 'El código ya no es válido', dispositivo });
+      }
     } else {
       res.status(404).send('Device not found');
     }
