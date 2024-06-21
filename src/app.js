@@ -10,6 +10,7 @@ const desktopCuentasDepositoRoutes = require('./desktop/routes/cuentasDepositoRo
 const desktopNotasCobradasRoutes = require('./desktop/routes/notasCobradasRoutes'); 
 const mobileEmpresaRoutes = require('./mobile/routes/mobileEmpresaRoutes');
 const mobileDispositivosRoutes = require('./mobile/routes/mobileDispositivosRoutes');
+const mobileCobradoresRoutes = require('./mobile/routes/cobradoresRoutes');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/api/desktop/cuentas-deposito', desktopCuentasDepositoRoutes);
 app.use('/api/desktop/notas-cobradas', desktopNotasCobradasRoutes);
 app.use('/api/mobile/empresas', mobileEmpresaRoutes);
 app.use('/api/mobile/dispositivos', mobileDispositivosRoutes);
+app.use('/api/mobile/cobradores', mobileCobradoresRoutes);
 
 app.get('/api/saludo', (req, res) => {
   console.log(`saludando`);
