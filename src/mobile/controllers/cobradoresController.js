@@ -11,6 +11,17 @@ const getCobradoresMobile = async (req, res) => {
   }
 };
 
+// Obtener cobradores por empresa_id
+const getCobradoresByEmpresaId = async (req, res) => {
+  try {
+    const { empresa_id } = req.params;
+    const cobradores = await CobradorMobile.findAll({ where: { empresa_id } });
+    res.json(cobradores);
+  } catch (error) {
+    res.status(500).send('Error fetching collectors by empresa_id');
+  }
+};
+
 // Endpoint para sincronizar datos desde la tabla de desktop
 const syncCobradores = async (req, res) => {
   try {
@@ -25,5 +36,6 @@ const syncCobradores = async (req, res) => {
 
 module.exports = {
   getCobradoresMobile,
+  getCobradoresByEmpresaId,
   syncCobradores
 };
