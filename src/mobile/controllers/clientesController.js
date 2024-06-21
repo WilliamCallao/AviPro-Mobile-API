@@ -11,6 +11,19 @@ const getClientesMobile = async (req, res) => {
   }
 };
 
+// Obtener clientes por empresa_id
+const getClientesByEmpresa = async (req, res) => {
+  try {
+    const { empresa_id } = req.params;
+    const clientes = await ClienteMobile.findAll({
+      where: { empresa_id }
+    });
+    res.json(clientes);
+  } catch (error) {
+    res.status(500).send('Error fetching clients for the specified company');
+  }
+};
+
 // Endpoint para sincronizar datos desde la tabla de desktop
 const syncClientes = async (req, res) => {
   try {
@@ -25,5 +38,6 @@ const syncClientes = async (req, res) => {
 
 module.exports = {
   getClientesMobile,
+  getClientesByEmpresa,
   syncClientes
 };
