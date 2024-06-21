@@ -11,6 +11,8 @@ const desktopNotasCobradasRoutes = require('./desktop/routes/notasCobradasRoutes
 const mobileEmpresaRoutes = require('./mobile/routes/mobileEmpresaRoutes');
 const mobileDispositivosRoutes = require('./mobile/routes/mobileDispositivosRoutes');
 const mobileCobradoresRoutes = require('./mobile/routes/cobradoresRoutes');
+const mobileClientesRoutes = require('./mobile/routes/clientesRoutes');
+const mobileNotasPendientesRoutes = require('./mobile/routes/notasPendientesRoutes');
 
 const app = express();
 
@@ -25,6 +27,8 @@ app.use('/api/desktop/notas-cobradas', desktopNotasCobradasRoutes);
 app.use('/api/mobile/empresas', mobileEmpresaRoutes);
 app.use('/api/mobile/dispositivos', mobileDispositivosRoutes);
 app.use('/api/mobile/cobradores', mobileCobradoresRoutes);
+app.use('/api/mobile/clientes', mobileClientesRoutes);
+app.use('/api/mobile/notas-pendientes', mobileNotasPendientesRoutes);
 
 app.get('/api/saludo', (req, res) => {
   console.log(`saludando`);
