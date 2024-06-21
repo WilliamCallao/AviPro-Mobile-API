@@ -1,42 +1,62 @@
+# version: '3.8'
+
+# services:
+#   db:
+#     image: mysql:8.0
+#     container_name: avi-pro-db
+#     environment:
+#       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+#       MYSQL_DATABASE: ${DB_NAME}
+#       MYSQL_USER: ${DB_USER}
+#       MYSQL_PASSWORD: ${DB_PASSWORD}
+#     ports:
+#       - "${DB_PORT}:3306"
+#     volumes:
+#       - db_data:/var/lib/mysql
+#     networks:
+#       - avi-pro_network
+
+#   app:
+#     build: .
+#     container_name: avi-pro-app
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - db
+#     networks:
+#       - avi-pro_network
+#     environment:
+#       DB_HOST: db
+#       DB_USER: ${DB_USER}
+#       DB_PASSWORD: ${DB_PASSWORD}
+#       DB_NAME: ${DB_NAME}
+#       DB_PORT: 3306
+#       PORT: 3000
+#     volumes:
+#       - .:/usr/src/app
+
+# volumes:
+#   db_data:
+
+# networks:
+#   avi-pro_network:
+
+# ---------------------------
+
 version: '3.8'
 
 services:
-  db:
-    image: mysql:8.0
-    container_name: avi-pro-db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "${DB_PORT}:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-    networks:
-      - avi-pro_network
-
   app:
     build: .
-    container_name: avi-pro-app
     ports:
       - "3000:3000"
-    depends_on:
-      - db
-    networks:
-      - avi-pro_network
     environment:
-      DB_HOST: db
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
-      DB_PORT: 3306
-      PORT: 3000
+      - NODE_ENV=development
+      - PORT=3000
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
     volumes:
       - .:/usr/src/app
-
-volumes:
-  db_data:
-
-networks:
-  avi-pro_network:

@@ -1,23 +1,17 @@
-# Usa una imagen base de Node.js
-FROM node:22
+# FROM node:22
+# WORKDIR /usr/src/app
+# COPY package*.json ./
+# RUN npm install
+# COPY . .
+# RUN npm install -g nodemon
+# EXPOSE 3000
+# CMD ["npm", "start"]
 
-# Establece el directorio de trabajo
+FROM node:18
 WORKDIR /usr/src/app
-
-# Copia los archivos package.json y package-lock.json
 COPY package*.json ./
-
-# Instala las dependencias
 RUN npm install
-
-# Copia el resto de los archivos de la aplicación
 COPY . .
-
-# Instala nodemon globalmente
-RUN npm install -g nodemon
-
-# Expone el puerto de la aplicación
 EXPOSE 3000
-
-# Comando para iniciar la aplicación
-CMD ["npm", "start"]
+ENV PORT=3000
+CMD [ "npm", "start" ]
