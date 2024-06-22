@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../configs/database'); // Asegúrate de que esta ruta sea correcta
+const sequelize = require('../../configs/database');
 
 const NotaPendienteMobile = sequelize.define('NotaPendienteMobile', {
   empresa_id: {
