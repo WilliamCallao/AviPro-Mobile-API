@@ -1,4 +1,3 @@
-// controllers/mobileEmpresaController.js
 const MobileEmpresa = require('../models/mobileEmpresa');
 
 // Obtener todas las empresas
@@ -22,7 +21,25 @@ const addEmpresa = async (req, res) => {
   }
 };
 
+// Obtener el nombre de una empresa por su ID
+const getEmpresaNombreById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const empresa = await MobileEmpresa.findByPk(id, {
+      attributes: ['nombre']
+    });
+    if (empresa) {
+      res.json(empresa);
+    } else {
+      res.status(404).send('Company not found');
+    }
+  } catch (error) {
+    res.status(500).send('Error fetching company name');
+  }
+};
+
 module.exports = {
   getEmpresas,
-  addEmpresa
+  addEmpresa,
+  getEmpresaNombreById
 };

@@ -80,9 +80,6 @@ const getClientesConNotasPendientes = async (req, res) => {
       type: sequelize.QueryTypes.SELECT
     });
 
-    console.log('Query executed successfully');
-    console.log(results); // Imprime el valor de results para verificar su estructura
-
     // Verificar si results es un array
     const clientesArray = Array.isArray(results) ? results : [results];
 
