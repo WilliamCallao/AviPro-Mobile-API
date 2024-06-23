@@ -1,6 +1,5 @@
 const ClienteDesktop = require('../../desktop/models/clientesDesktop');
 const ClienteMobile = require('../models/clientesMobile');
-const NotaPendienteMobile = require('../models/notasPendientesMobile');
 const sequelize = require('../../configs/database');
 
 // Obtener todos los clientes de móvil
@@ -96,12 +95,12 @@ const getClientesConNotasPendientes = async (req, res) => {
           direccion: row.direccion,
           telefono: row.telefono,
           cobrador_id: row.cobrador_id,
-          notas_pendientes: [],
-          notas_cobradas: []
+          notas_pendientes: new Set(),
+          notas_cobradas: new Set()
         };
       }
       if (row.nota_nro_nota) {
-        clientesMap[row.cliente_id].notas_pendientes.push({
+        clientesMap[row.cliente_id].notas_pendientes.add(JSON.stringify({
           empresa_id: row.nota_empresa_id,
           sucursal_id: row.nota_sucursal_id,
           cuenta: row.nota_cuenta,
@@ -112,10 +111,10 @@ const getClientesConNotasPendientes = async (req, res) => {
           saldo_pendiente: row.nota_saldo_pendiente,
           fecha_venta: row.nota_fecha_venta,
           fecha_vence: row.nota_fecha_vence
-        });
+        }));
       }
       if (row.cobrada_fecha) {
-        clientesMap[row.cliente_id].notas_cobradas.push({
+        clientesMap[row.cliente_id].notas_cobradas.add(JSON.stringify({
           empresa_id: row.cobrada_empresa_id,
           sucursal_id: row.cobrada_sucursal_id,
           cuenta: row.cobrada_cuenta,
@@ -129,16 +128,24 @@ const getClientesConNotasPendientes = async (req, res) => {
           observaciones: row.cobrada_observaciones,
           nro_factura: row.cobrada_nro_factura,
           fecha_registro: row.cobrada_fecha_registro
-        });
+        }));
       }
     });
 
-    res.json(Object.values(clientesMap));
+    // Convertir Sets a arrays y parsear JSON strings de vuelta a objetos
+    const clientesList = Object.values(clientesMap).map(cliente => ({
+      ...cliente,
+      notas_pendientes: Array.from(cliente.notas_pendientes).map(nota => JSON.parse(nota)),
+      notas_cobradas: Array.from(cliente.notas_cobradas).map(nota => JSON.parse(nota))
+    }));
+
+    res.json(clientesList);
   } catch (error) {
     console.error('Error fetching clients with pending and paid notes', error);
     res.status(500).send('Error fetching clients with pending and paid notes');
   }
 };
+
 // Endpoint para sincronizar datos desde la tabla de desktop
 const syncClientes = async (req, res) => {
   try {
