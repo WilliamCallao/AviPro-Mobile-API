@@ -11,6 +11,17 @@ const getCuentasDepositoMobile = async (req, res) => {
   }
 };
 
+// Obtener cuentas de depósito por empresa_id
+const getCuentasDepositoByEmpresaId = async (req, res) => {
+  try {
+    const { empresa_id } = req.params;
+    const cuentas = await CuentaDepositoMobile.findAll({ where: { empresa_id } });
+    res.json(cuentas);
+  } catch (error) {
+    res.status(500).send('Error fetching mobile deposit accounts by empresa_id');
+  }
+};
+
 // Endpoint para sincronizar datos desde la tabla de desktop
 const syncCuentasDeposito = async (req, res) => {
   try {
@@ -25,5 +36,6 @@ const syncCuentasDeposito = async (req, res) => {
 
 module.exports = {
   getCuentasDepositoMobile,
+  getCuentasDepositoByEmpresaId,
   syncCuentasDeposito
 };
