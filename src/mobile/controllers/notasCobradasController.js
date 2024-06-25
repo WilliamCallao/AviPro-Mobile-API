@@ -23,7 +23,49 @@ const syncNotasCobradas = async (req, res) => {
   }
 };
 
+// Registrar un nuevo pago
+const registerPayment = async (req, res) => {
+  const {
+    empresa_id,
+    sucursal_id,
+    cuenta,
+    fecha,
+    referencia,
+    pago_a_nota,
+    monto,
+    moneda,
+    modo_pago,
+    cta_deposito,
+    observaciones,
+    nro_factura
+  } = req.body;
+
+  try {
+    const newPayment = await NotasCobradasMobile.create({
+      empresa_id,
+      sucursal_id,
+      cuenta,
+      fecha: fecha || new Date(),
+      referencia: referencia || null,
+      pago_a_nota,
+      monto,
+      moneda,
+      modo_pago,
+      cta_deposito,
+      observaciones: observaciones || null,
+      nro_factura: nro_factura || null,
+      fecha_registro: new Date()
+    });
+
+    res.status(201).json(newPayment);
+  } catch (error) {
+    console.error('Error registering payment: ', error);
+    res.status(500).send('Error registering payment');
+  }
+};
+
 module.exports = {
   getNotasCobradasMobile,
-  syncNotasCobradas
+  syncNotasCobradas,
+  registerPayment
 };
