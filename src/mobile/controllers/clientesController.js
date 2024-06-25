@@ -279,10 +279,30 @@ const syncClientes = async (req, res) => {
   }
 };
 
+const getClienteByEmpresaAndCuenta = async (req, res) => {
+  const { empresa_id, cuenta } = req.params;
+
+  try {
+    const cliente = await ClienteMobile.findOne({
+      where: { empresa_id, cuenta }
+    });
+
+    if (cliente) {
+      res.json(cliente);
+    } else {
+      res.status(404).send('Cliente no encontrado');
+    }
+  } catch (error) {
+    console.error('Error fetching client by empresa and cuenta', error);
+    res.status(500).send('Error fetching client by empresa and cuenta');
+  }
+};
+
 module.exports = {
   getClientesMobile,
   getClientesByEmpresa,
   getClientesConNotasPendientes,
   getClienteByCuenta,
-  syncClientes
+  syncClientes,
+  getClienteByEmpresaAndCuenta
 };
