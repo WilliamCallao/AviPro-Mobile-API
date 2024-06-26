@@ -64,8 +64,32 @@ const registerPayment = async (req, res) => {
   }
 };
 
+// Rollback para eliminar el pago más reciente de una nota cobrada
+const rollbackNotaCobrada = async (req, res) => {
+  const { empresa_id, sucursal_id, cuenta, pago_a_nota } = req.body;
+
+  try {
+    const nota = await NotasCobradasMobile.findOne({
+      where: { empresa_id, sucursal_id, cuenta, pago_a_nota },
+      order: [['fecha_registro', 'DESC']]
+    });
+
+    if (!nota) {
+      return res.status(404).send('Nota not found');
+    }
+
+    await nota.destroy();
+
+    res.status(200).send({ message: 'Nota cobrada revertida' });
+  } catch (error) {
+    console.error('Error during rollback:', error);
+    res.status(500).send({ error: 'Error al revertir la nota cobrada' });
+  }
+};
+
 module.exports = {
   getNotasCobradasMobile,
   syncNotasCobradas,
-  registerPayment
+  registerPayment,
+  rollbackNotaCobrada
 };
