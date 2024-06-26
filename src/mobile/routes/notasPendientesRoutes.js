@@ -1,5 +1,5 @@
 const express = require('express');
-const { getNotasPendientesMobile, syncNotasPendientes, updateNotaPendiente } = require('../controllers/notasPendientesController');
+const { getNotasPendientesMobile, syncNotasPendientes, updateNotaPendiente, rollbackNotaPendiente } = require('../controllers/notasPendientesController');
 
 const router = express.Router();
 
@@ -25,5 +25,16 @@ router.post('/sync', syncNotasPendientes);
  * @body {number} monto_pagado - Monto pagado a agregar
  */
 router.put('/:empresa_id/:sucursal_id/:cuenta/:nro_nota', updateNotaPendiente);
+
+/**
+ * @route POST /api/mobile/notas-pendientes/rollback
+ * @desc Revertir la actualización del monto pagado y saldo pendiente de una nota específica
+ * @body {string} empresa_id - ID de la empresa
+ * @body {string} sucursal_id - ID de la sucursal
+ * @body {string} cuenta - Número de cuenta
+ * @body {string} nro_nota - Número de nota
+ * @body {number} monto - Monto a revertir
+ */
+router.post('/rollback', rollbackNotaPendiente);
 
 module.exports = router;

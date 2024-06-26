@@ -69,8 +69,43 @@ const updateNotaPendiente = async (req, res) => {
   }
 };
 
+// Rollback para actualizar el monto pagado y saldo pendiente de una nota
+const rollbackNotaPendiente = async (req, res) => {
+  const { empresa_id, sucursal_id, cuenta, nro_nota, monto } = req.body;
+
+  try {
+    const nota = await NotaPendienteMobile.findOne({
+      where: { empresa_id, sucursal_id, cuenta, nro_nota }
+    });
+
+    if (!nota) {
+      return res.status(404).send('Nota not found');
+    }
+
+    // Asegúrate de que los valores se procesan como decimales
+    const montoRollback = parseFloat(monto);
+    const nuevoMontoPagado = parseFloat(nota.monto_pagado) - montoRollback;
+    const nuevoSaldoPendiente = parseFloat(nota.importe_nota) - nuevoMontoPagado;
+
+    if (nuevoMontoPagado < 0) {
+      return res.status(400).send('El monto pagado no puede ser negativo');
+    }
+
+    // Actualiza la nota
+    nota.monto_pagado = nuevoMontoPagado.toFixed(2);
+    nota.saldo_pendiente = nuevoSaldoPendiente.toFixed(2);
+
+    await nota.save();
+
+    res.status(200).send({ message: 'Nota pendiente revertida' });
+  } catch (error) {
+    res.status(500).send({ error: 'Error al revertir la nota pendiente' });
+  }
+};
+
 module.exports = {
   getNotasPendientesMobile,
   syncNotasPendientes,
-  updateNotaPendiente
+  updateNotaPendiente,
+  rollbackNotaPendiente
 };
