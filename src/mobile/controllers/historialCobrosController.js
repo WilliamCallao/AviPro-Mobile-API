@@ -1,5 +1,6 @@
 const HistorialCobros = require('../models/historialCobrosMobile');
 const moment = require('moment-timezone');
+const { Op } = require('sequelize');
 
 const crearRegistro = async (req, res) => {
     const { empresa_id, cobrador_id, nombre_cliente, monto } = req.body;
