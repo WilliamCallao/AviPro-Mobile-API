@@ -17,12 +17,10 @@ const HistorialCobros = sequelize.define('HistorialCobros', {
     fecha: {
         type: DataTypes.DATEONLY,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
     },
     hora: {
         type: DataTypes.TIME,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
     },
     monto: {
         type: DataTypes.DECIMAL(15, 2),

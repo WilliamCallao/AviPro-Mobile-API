@@ -105,7 +105,6 @@ const updateEstadoCreado = async (req, res) => {
 const updateUltimoUso = async (req, res) => {
   try {
     const { codigo_id } = req.params;
-    console.log("RECIBIDO",codigo_id)
     const dispositivo = await MobileDispositivo.findByPk(codigo_id);
     if (dispositivo) {
       dispositivo.ultimo_uso = new Date();
