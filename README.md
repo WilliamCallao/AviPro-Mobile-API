@@ -6,7 +6,7 @@ AviPro Mobile API is the dedicated backend for the AviPro mobile application, im
 
 AviPro Mobile is an extension of Avi Pro+, a desktop system used for accounting and management of poultry companies. The mobile application is designed to digitize the management of outstanding invoice collections from clients, providing an efficient tool that is connected with its desktop version.
 
-![Untitled-2024-03-17-2028](https://github.com/WilliamCallao/AviPro-Mobile-API/assets/96638909/62bebc93-1d43-4b3f-9c38-05bb4c88b5cd)
+![Untitled-2024-03-17-2028](https://github.com/WilliamCallao/AviPro-Mobile-API/assets/96638909/682cd569-008e-40c5-9652-d372dbbcfd5a)
 
 ## Project Repositories
 
