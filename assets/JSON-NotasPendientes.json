@@ -122,7 +122,7 @@
     {
         "empresa_id": "02",
         "sucursal_id": "01",
-        "cuenta": "11201025001",
+        "cuenta": "11201010062",
         "fecha": "2024-01-01",
         "nro_nota": "R01210403",
         "importe_nota": 819.50,
@@ -158,7 +158,7 @@
     {
         "empresa_id": "02",
         "sucursal_id": "01",
-        "cuenta": "11201025001",
+        "cuenta": "11201010062",
         "fecha": "2024-01-06",
         "nro_nota": "R01210625",
         "importe_nota": 2192.40,
@@ -182,7 +182,7 @@
     {
         "empresa_id": "02",
         "sucursal_id": "01",
-        "cuenta": "11201025001",
+        "cuenta": "11201010062",
         "fecha": "2024-01-01",
         "nro_nota": "R01210848",
         "importe_nota": 2192.40,
@@ -274,5 +274,53 @@
         "saldo_pendiente": 51821.52,
         "fecha_venta": "2021-06-23",
         "fecha_vence": "2022-01-01"
+    },
+    {
+        "empresa_id": "01",
+        "sucursal_id": "02",
+        "cuenta": "112010290020002",
+        "fecha": "2024-01-15",
+        "nro_nota": "R02245004",
+        "importe_nota": 1776.00,
+        "monto_pagado": 0.00,
+        "saldo_pendiente": 1776.00,
+        "fecha_venta": "2024-01-15",
+        "fecha_vence": "2024-02-14"
+    },
+    {
+        "empresa_id": "01",
+        "sucursal_id": "02",
+        "cuenta": "112010290020002",
+        "fecha": "2024-01-18",
+        "nro_nota": "R02245010",
+        "importe_nota": 167.10,
+        "monto_pagado": 0.00,
+        "saldo_pendiente": 167.10,
+        "fecha_venta": "2024-01-18",
+        "fecha_vence": "2024-02-17"
+    },
+    {
+        "empresa_id": "01",
+        "sucursal_id": "02",
+        "cuenta": "112010290020002",
+        "fecha": "2024-01-23",
+        "nro_nota": "R02240055",
+        "importe_nota": 5570.00,
+        "monto_pagado": 0.00,
+        "saldo_pendiente": 5570.00,
+        "fecha_venta": "2024-01-23",
+        "fecha_vence": "2024-02-22"
+    },
+    {
+        "empresa_id": "01",
+        "sucursal_id": "02",
+        "cuenta": "112010290020002",
+        "fecha": "2024-02-08",
+        "nro_nota": "R02240099",
+        "importe_nota": 11140.02,
+        "monto_pagado": 0.00,
+        "saldo_pendiente": 11140.02,
+        "fecha_venta": "2021-02-08",
+        "fecha_vence": "2022-03-09"
     }
 ]

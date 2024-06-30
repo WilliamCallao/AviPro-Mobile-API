@@ -1,32 +1,38 @@
 [
     {
       "empresa_id": "02",
-      "cuenta": "11201025001",
+      "cuenta": "11102019001",
       "descripcion": "FIE.CTA 6-8918",
+      "tipo": "B"
+    },
+    {
+      "empresa_id": "02",
+      "cuenta": "11101020002",
+      "descripcion": "COBRANZAS  EN TRANSITO CBBA-SCZ",
       "tipo": "E"
     },
     {
       "empresa_id": "02",
-      "cuenta": "11201010471",
-      "descripcion": "FIE.CTA 6-8918",
-      "tipo": "E"
-    },
-    {
-      "empresa_id": "01",
-      "cuenta": "11201010212",
-      "descripcion": "B.UNION.CTA 8-832",
+      "cuenta": "1110201S004",
+      "descripcion": "BCO. BNB CTA. CTE. Nº 300017-4016 Bs",
       "tipo": "B"
     },
     {
       "empresa_id": "01",
-      "cuenta": "1120102E004",
-      "descripcion": "B.UNION.CTA 8-832",
+      "cuenta": "1110201S001",
+      "descripcion": "BCO. BISA CTA. Nº 4454770019 Bs",
+      "tipo": "B"
+    },
+    {
+      "empresa_id": "01",
+      "cuenta": "11101010002",
+      "descripcion": "EFECTIVO A RENDIR",
       "tipo": "E"
     },
     {
       "empresa_id": "01",
-      "cuenta": "11201020427",
-      "descripcion": "FIE.CTA 6-832",
+      "cuenta": "11101010001",
+      "descripcion": "CAJA GENERAL DE EFECTIVO",
       "tipo": "E"
     }
   ]
