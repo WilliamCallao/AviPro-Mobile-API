@@ -253,5 +253,50 @@
     "observaciones": "",
     "nro_factura": 17,
     "fecha_registro": "2024-01-05"
+  },
+  {
+    "empresa_id": "02",
+    "sucursal_id": "02",
+    "cuenta": "11201020456",
+    "fecha": "2024-02-01",
+    "referencia": "",
+    "pago_a_nota": "R02245034",
+    "monto": 760.00,
+    "moneda": "B",
+    "modo_pago": "E",
+    "cta_deposito": "11101010002",
+    "observaciones": "",
+    "nro_factura": 18,
+    "fecha_registro": "2024-03-05"
+  },
+  {
+    "empresa_id": "02",
+    "sucursal_id": "02",
+    "cuenta": "11201020456",
+    "fecha": "2024-02-01",
+    "referencia": "",
+    "pago_a_nota": "R02245034",
+    "monto": 40000.00,
+    "moneda": "B",
+    "modo_pago": "E",
+    "cta_deposito": "11101010002",
+    "observaciones": "",
+    "nro_factura": 19,
+    "fecha_registro": "2024-03-10"
+  },
+  {
+    "empresa_id": "02",
+    "sucursal_id": "02",
+    "cuenta": "11201020456",
+    "fecha": "2024-02-01",
+    "referencia": "",
+    "pago_a_nota": "R02245034",
+    "monto": 1000.00,
+    "moneda": "B",
+    "modo_pago": "E",
+    "cta_deposito": "11101010002",
+    "observaciones": "",
+    "nro_factura": 20,
+    "fecha_registro": "2024-03-15"
   }
 ]
