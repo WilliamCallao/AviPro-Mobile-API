@@ -118,11 +118,28 @@ const updateUltimoUso = async (req, res) => {
   }
 };
 
+const getEstadoByCodigoId = async (req, res) => {
+  try {
+    const { codigo_id } = req.params;
+    const dispositivo = await MobileDispositivo.findByPk(codigo_id, {
+      attributes: ['estado'] // Solo selecciona el campo 'estado'
+    });
+    if (dispositivo) {
+      res.json({ estado: dispositivo.estado });
+    } else {
+      res.status(404).send('Device not found');
+    }
+  } catch (error) {
+    res.status(500).send('Error fetching device status');
+  }
+};
+
 module.exports = {
   getDispositivos,
   addDispositivo,
   updateEstadoUsado,
   updateEstadoDesactivado,
   updateEstadoCreado,
-  updateUltimoUso
+  updateUltimoUso,
+  getEstadoByCodigoId
 };
