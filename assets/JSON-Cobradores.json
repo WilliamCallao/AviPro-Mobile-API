@@ -20,7 +20,7 @@
     {
         "email": "vasquez@gmail.com",
         "empresa_id": "02",
-        "cobrador_id": "02",
+        "cobrador_id": "0E",
         "nombre": "DR. FAVIO A. VASQUEZ FORERO"
     },
     {
@@ -28,5 +28,11 @@
         "empresa_id": "02",
         "cobrador_id": "03",
         "nombre": "DR. MARCO FAGUNDES"
+    },
+    {
+        "email": "valerio@gmail.com",
+        "empresa_id": "02",
+        "cobrador_id": "0O",
+        "nombre": "VALERIO CASTRO"
     }
 ]

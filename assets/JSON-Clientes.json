@@ -34,7 +34,7 @@
         "sucursal_id": "02",
         "telefono": "3-476161",
         "empresa_id": "01",
-        "direccion": "4to anillo Guaracahi",
+        "direccion": "4TO ANILLO GUARACACHI",
         "nombre": "ANGLARILL SERRATE RICARDO",
         "cobrador_id": "04",
         "cuenta": "112010290020002"
@@ -44,7 +44,7 @@
         "sucursal_id": "01",
         "telefono": null,
         "empresa_id": "01",
-        "direccion": "Zona Sud Itocta s/n",
+        "direccion": "ZONA SUD ITOCTA S/N",
         "nombre": "COCA HENRRY",
         "cobrador_id": "04",
         "cuenta": "11201010470"
@@ -58,16 +58,6 @@
         "nombre": "TORRICO CARLA",
         "cobrador_id": "02",
         "cuenta": "11201020241"
-    },
-    {
-        "cliente_id": "0CI",
-        "sucursal_id": "01",
-        "telefono": "9347065-78461359",
-        "empresa_id": "02",
-        "direccion": "COLONIA JAPONESA SAN JUAN",
-        "nombre": "CAISY LTDA.",
-        "cobrador_id": "02",
-        "cuenta": "11201025001"
     },
     {
         "cliente_id": "0N1",
@@ -98,5 +88,65 @@
         "nombre": "LEDEZMA PEREDO DANIEL",
         "cobrador_id": "03",
         "cuenta": "11201011003"
+    },
+    {
+        "cliente_id": "01O",
+        "sucursal_id": "01",
+        "telefono": "79389014 - 4277646",
+        "empresa_id": "02",
+        "direccion": "ABRA-ESMERALDA-CARMELITAS",
+        "nombre": "GUARAGUARA FLORENCIO",
+        "cobrador_id": "0E",
+        "cuenta": "11201010062"
+    },
+    {
+        "cliente_id": "06T",
+        "sucursal_id": "02",
+        "telefono": "77307171",
+        "empresa_id": "02",
+        "direccion": "",
+        "nombre": "ROJAS MAURICIO",
+        "cobrador_id": "0E",
+        "cuenta": "11201020066"
+    },
+    {
+        "cliente_id": "03Q",
+        "sucursal_id": "02",
+        "telefono": "4316909-70776578",
+        "empresa_id": "01",
+        "direccion": "APOTE",
+        "nombre": "SAAVEDRA PEGGY",
+        "cobrador_id": "04",
+        "cuenta": "11201010137"
+    },
+    {
+        "cliente_id": "0NL",
+        "sucursal_id": "02",
+        "telefono": "",
+        "empresa_id": "02",
+        "direccion": "",
+        "nombre": "OLMOS SALAZAR M. ELENA",
+        "cobrador_id": "0O",
+        "cuenta": "11201020456"
+    },
+    {
+        "cliente_id": "0K7",
+        "sucursal_id": "02",
+        "telefono": "3-476161",
+        "empresa_id": "01",
+        "direccion": "4TO ANILLO GUARACACHI",
+        "nombre": "ANGLARILL SERRATE OSCAR",
+        "cobrador_id": "04",
+        "cuenta": "112010290020006"
+    },
+    {
+        "cliente_id": "0K9",
+        "sucursal_id": "01",
+        "telefono": "3525703",
+        "empresa_id": "01",
+        "direccion": "CALLE NATANIEL AGUIRRE #417",
+        "nombre": "MROCHEK HACKER  MARCELO",
+        "cobrador_id": "0L",
+        "cuenta": "112010290030001"
     }
 ]
