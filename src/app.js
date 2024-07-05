@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./configs/database');
+
 const desktopClientesRoutes = require('./desktop/routes/clientesRoutes');
 const desktopNotasPendientesRoutes = require('./desktop/routes/notasPendientesRoutes');
 const desktopCobradoresRoutes = require('./desktop/routes/cobradoresRoutes');

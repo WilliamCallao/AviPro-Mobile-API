@@ -1,5 +1,8 @@
 const UsuarioDesktop = require('../models/usuarioDesktop');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const JWT_SECRET = proccess.env.JWT_SECRET;
 
 // Obtener todos los usuarios de escritorio
 const getUsuariosDesktop = async (req, res) => {
@@ -24,7 +27,8 @@ const addUsuario = async (req, res) => {
         }
         const passwordNew = await bcrypt.hash(password, 10);
         const newUsuario = await UsuarioDesktop.create({ email, password: passwordNew });
-        res.status(201).json(newUsuario);
+        const token = jwt.sign({ id: newUsuario.usuario_id }, JWT_SECRET);
+        res.status(201).json({ token });
     } catch (error) {
     res.status(500).send('Error adding desktop user');
     }
@@ -45,14 +49,30 @@ const loginUsuario = async (req, res) => {
         if(!validPassword) {
             return res.status(400).send('The password is incorrect');
         }
-        res.status(200).send('Login successful');
+        const token = jwt.sign({ id: usuario.usuario_id }, JWT_SECRET);
+        res.json({ token });
     } catch (error) {
         res.status(500).send('Error adding desktop user');
     }
 };
 
+const verifyToken = (req, res, next) => {
+    const token = req.headers['authorization'];
+    if(!token) {
+        return res.status(401).send('Access denied');
+    }
+    jwt.verify(token, JWT_SECRET, (error, user) => {
+        if(error) {
+            return res.status(403).send('Invalid token');
+        }
+        req.user = user;
+        next();
+    });
+};
+
 module.exports = {
     getUsuariosDesktop,
     addUsuario,
-    loginUsuario
+    loginUsuario,
+    verifyToken
 };

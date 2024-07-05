@@ -2,12 +2,13 @@ const express = require('express');
 const {
   getUsuariosDesktop,
   addUsuario,
-  loginUsuario
+  loginUsuario,
+  verifyToken
 } = require('../controllers/usuarioController');
 
 const router = express.Router();
 
-router.get('/', getUsuariosDesktop);
+router.get('/', verifyToken, getUsuariosDesktop);
 router.post('/register', addUsuario);
 router.post('/login', loginUsuario);
 
