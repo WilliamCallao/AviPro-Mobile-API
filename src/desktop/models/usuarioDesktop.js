@@ -10,13 +10,18 @@ const UsuarioDesktop = sequelize.define('UsuarioDesktop', {
     },
     email: {
         type: DataTypes.CHAR(70),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
-    }, {
+}, {
     tableName: 'desktop_usuarios',
     timestamps: false
 });

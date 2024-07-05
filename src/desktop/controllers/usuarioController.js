@@ -1,5 +1,7 @@
+// src/desktop/controllers/usuarioController.js
 const UsuarioDesktop = require('../models/usuarioDesktop');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -9,59 +11,63 @@ const getUsuariosDesktop = async (req, res) => {
     const usuarios = await UsuarioDesktop.findAll();
     res.json(usuarios);
   } catch (error) {
-    res.status(500).send('Error fetching desktop users');
+    res.status(500).send('Error al obtener los usuarios de escritorio');
   }
 };
 
 // Agregar un nuevo usuario de escritorio
 const addUsuario = async (req, res) => {
-    const {email, password } = req.body;
-    if(!email || !password) {
-      return res.status(400).send('Error adding data to the database');
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).send('El correo electrónico y la contraseña son obligatorios');
     }
     try {
         const usuario = await UsuarioDesktop.findOne({ where: { email } });
-        if(usuario) {
-            return res.status(400).send('The email is already registered');
+        if (usuario) {
+            return res.status(400).send('El correo electrónico ya está registrado');
         }
-        const newUsuario = await UsuarioDesktop.create({ email, password });
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUsuario = await UsuarioDesktop.create({ email, password: hashedPassword });
         res.status(201).json(newUsuario);
     } catch (error) {
         console.error(error);
-    res.status(500).send('Error adding desktop user');
+        res.status(500).send('Error al agregar el usuario de escritorio');
     }
 };
 
-//Iniciar sesion
+// Iniciar sesión
 const loginUsuario = async (req, res) => {
     const { email, password } = req.body;
-    if(!email || !password) {
-        return res.status(400).send('Error adding data to the database');
+    if (!email || !password) {
+        return res.status(400).send('El correo electrónico y la contraseña son obligatorios');
     }
     try {
         const usuario = await UsuarioDesktop.findOne({ where: { email } });
-        if(!usuario) {
-            return res.status(400).send('The email is not registered');
+        if (!usuario) {
+            return res.status(400).send('El correo electrónico no está registrado');
         }
-        const validPassword = usuario.password === password;
-        if(!validPassword) {
-            return res.status(400).send('The password is incorrect');
+        if (!usuario.isActive) {
+            return res.status(403).send('Usuario no activo. Por favor, contacte al administrador.');
+        }
+        const validPassword = await bcrypt.compare(password, usuario.password);
+        if (!validPassword) {
+            return res.status(400).send('La contraseña es incorrecta');
         }
         const token = jwt.sign({ id: usuario.usuario_id }, JWT_SECRET);
         res.json({ token });
     } catch (error) {
-        res.status(500).send('Error adding desktop user');
+        res.status(500).send('Error al iniciar sesión');
     }
 };
 
 const verifyToken = (req, res, next) => {
     const token = req.headers['authorization'];
-    if(!token) {
-        return res.status(401).send('Access denied');
+    if (!token) {
+        return res.status(401).send('Acceso denegado');
     }
     jwt.verify(token, JWT_SECRET, (error, user) => {
-        if(error) {
-            return res.status(403).send('Invalid token');
+        if (error) {
+            return res.status(403).send('Token inválido');
         }
         req.user = user;
         next();
