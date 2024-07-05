@@ -1,11 +1,11 @@
-// usuaruiDesktop 
+// usuarioDesktop 
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../configs/database');
 
 const UsuarioDesktop = sequelize.define('UsuarioDesktop', {
     usuario_id: {
-        type: DataTypes.CHAR(3),
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true
     },
     email: {
@@ -13,7 +13,7 @@ const UsuarioDesktop = sequelize.define('UsuarioDesktop', {
         allowNull: false
     },
     password: {
-        type: DataTypes.CHAR(20),
+        type: DataTypes.STRING,
         allowNull: false
     }
     }, {

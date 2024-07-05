@@ -1,8 +1,7 @@
 const UsuarioDesktop = require('../models/usuarioDesktop');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = proccess.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Obtener todos los usuarios de escritorio
 const getUsuariosDesktop = async (req, res) => {
@@ -25,11 +24,10 @@ const addUsuario = async (req, res) => {
         if(usuario) {
             return res.status(400).send('The email is already registered');
         }
-        const passwordNew = await bcrypt.hash(password, 10);
-        const newUsuario = await UsuarioDesktop.create({ email, password: passwordNew });
-        const token = jwt.sign({ id: newUsuario.usuario_id }, JWT_SECRET);
-        res.status(201).json({ token });
+        const newUsuario = await UsuarioDesktop.create({ email, password });
+        res.status(201).json(newUsuario);
     } catch (error) {
+        console.error(error);
     res.status(500).send('Error adding desktop user');
     }
 };
@@ -45,7 +43,7 @@ const loginUsuario = async (req, res) => {
         if(!usuario) {
             return res.status(400).send('The email is not registered');
         }
-        const validPassword = await bcrypt.compare(password, usuario.password);
+        const validPassword = usuario.password === password;
         if(!validPassword) {
             return res.status(400).send('The password is incorrect');
         }
