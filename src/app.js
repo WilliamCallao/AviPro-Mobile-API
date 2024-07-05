@@ -8,6 +8,7 @@ const desktopNotasPendientesRoutes = require('./desktop/routes/notasPendientesRo
 const desktopCobradoresRoutes = require('./desktop/routes/cobradoresRoutes');
 const desktopCuentasDepositoRoutes = require('./desktop/routes/cuentasDepositoRoutes'); 
 const desktopNotasCobradasRoutes = require('./desktop/routes/notasCobradasRoutes'); 
+const desktopUsuariosRoutes = require('./desktop/routes/usuarioRoutes');
 const mobileEmpresaRoutes = require('./mobile/routes/mobileEmpresaRoutes');
 const mobileDispositivosRoutes = require('./mobile/routes/mobileDispositivosRoutes');
 const mobileCobradoresRoutes = require('./mobile/routes/cobradoresRoutes');
@@ -27,6 +28,7 @@ app.use('/api/desktop/notas-pendientes', desktopNotasPendientesRoutes);
 app.use('/api/desktop/cobradores', desktopCobradoresRoutes);
 app.use('/api/desktop/cuentas-deposito', desktopCuentasDepositoRoutes);
 app.use('/api/desktop/notas-cobradas', desktopNotasCobradasRoutes);
+app.use('/api/desktop/usuarios', desktopUsuariosRoutes);
 app.use('/api/mobile/empresas', mobileEmpresaRoutes);
 app.use('/api/mobile/dispositivos', mobileDispositivosRoutes);
 app.use('/api/mobile/cobradores', mobileCobradoresRoutes);
