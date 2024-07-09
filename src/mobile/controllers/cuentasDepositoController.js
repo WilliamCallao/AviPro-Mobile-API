@@ -34,8 +34,21 @@ const syncCuentasDeposito = async (req, res) => {
   }
 };
 
+// Cargar datos desde un archivo JSON
+const uploadJsonData = async (req, res) => {
+  const cuentas = req.body;
+  try {
+    await CuentaDepositoMobile.destroy({ where: {} }); // Borra todos los registros existentes
+    const newCuentas = await CuentaDepositoMobile.bulkCreate(cuentas); // Carga los nuevos datos desde el JSON
+    res.status(201).json(newCuentas);
+  } catch (error) {
+    res.status(500).send('Error loading JSON data');
+  }
+};
+
 module.exports = {
   getCuentasDepositoMobile,
   getCuentasDepositoByEmpresaId,
-  syncCuentasDeposito
+  syncCuentasDeposito,
+  uploadJsonData
 };
