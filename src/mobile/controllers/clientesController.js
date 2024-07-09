@@ -52,6 +52,7 @@ const getClientesConNotasPendientes = async (req, res) => {
         np.saldo_pendiente AS nota_saldo_pendiente,
         np.fecha_venta AS nota_fecha_venta,
         np.fecha_vence AS nota_fecha_vence,
+        np.nro_factura AS nota_nro_factura,
         nc.empresa_id AS cobrada_empresa_id,
         nc.sucursal_id AS cobrada_sucursal_id,
         nc.cuenta AS cobrada_cuenta,
@@ -111,7 +112,8 @@ const getClientesConNotasPendientes = async (req, res) => {
           monto_pagado: row.nota_monto_pagado,
           saldo_pendiente: row.nota_saldo_pendiente,
           fecha_venta: row.nota_fecha_venta,
-          fecha_vence: row.nota_fecha_vence
+          fecha_vence: row.nota_fecha_vence,
+          nro_factura: row.nota_nro_factura
         }));
       }
       if (row.cobrada_fecha) {
@@ -125,7 +127,8 @@ const getClientesConNotasPendientes = async (req, res) => {
           monto: row.cobrada_monto,
           moneda: row.cobrada_moneda,
           modo_pago: row.cobrada_modo_pago,
-          cta_deposito: row.cobrada_cta_deposito,
+          // cta_deposito: row.cobrada_cta_deposito,
+          cta_deposito: row.cta_deposito,
           observaciones: row.cobrada_observaciones,
           nro_factura: row.cobrada_nro_factura,
           fecha_registro: row.cobrada_fecha_registro
@@ -146,6 +149,7 @@ const getClientesConNotasPendientes = async (req, res) => {
     res.status(500).send('Error fetching clients with pending and paid notes');
   }
 };
+
 
 // Obtener cliente por cuenta con sus notas pendientes y cobradas
 const getClienteByCuenta = async (req, res) => {
@@ -173,6 +177,7 @@ const getClienteByCuenta = async (req, res) => {
         np.saldo_pendiente AS nota_saldo_pendiente,
         np.fecha_venta AS nota_fecha_venta,
         np.fecha_vence AS nota_fecha_vence,
+        np.nro_factura AS nota_nro_factura,
         nc.empresa_id AS cobrada_empresa_id,
         nc.sucursal_id AS cobrada_sucursal_id,
         nc.cuenta AS cobrada_cuenta,
@@ -232,7 +237,8 @@ const getClienteByCuenta = async (req, res) => {
           monto_pagado: row.nota_monto_pagado,
           saldo_pendiente: row.nota_saldo_pendiente,
           fecha_venta: row.nota_fecha_venta,
-          fecha_vence: row.nota_fecha_vence
+          fecha_vence: row.nota_fecha_vence,
+          nro_factura: row.nota_nro_factura
         }));
       }
       if (row.cobrada_fecha) {
@@ -267,6 +273,7 @@ const getClienteByCuenta = async (req, res) => {
     res.status(500).send('Error fetching client with pending and paid notes');
   }
 };
+
 
 // Cargar datos desde un archivo JSON
 const uploadJsonData = async (req, res) => {
