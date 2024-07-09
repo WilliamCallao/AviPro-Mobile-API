@@ -1,5 +1,6 @@
 const NotasCobradasMobile = require('../models/notasCobradasMobile');
 const NotasCobradasDesktop = require('../../desktop/models/notasCobradasDesktop');
+const moment = require('moment-timezone');
 
 // Obtener todas las notas cobradas móviles
 const getNotasCobradasMobile = async (req, res) => {
@@ -37,7 +38,8 @@ const registerPayment = async (req, res) => {
     modo_pago,
     cta_deposito,
     observaciones,
-    nro_factura
+    nro_factura,
+    cobrador_id
   } = req.body;
 
   try {
@@ -54,7 +56,8 @@ const registerPayment = async (req, res) => {
       cta_deposito,
       observaciones: observaciones || null,
       nro_factura: nro_factura || null,
-      fecha_registro: new Date()
+      cobrador_id,
+      fecha_registro: moment().tz('America/La_Paz').format() // Fecha en la zona horaria de Bolivia
     });
 
     res.status(201).json(newPayment);

@@ -4,15 +4,18 @@ const sequelize = require('../../configs/database');
 const NotasCobradasMobile = sequelize.define('NotasCobradasMobile', {
   empresa_id: {
     type: DataTypes.CHAR(2),
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   },
   sucursal_id: {
     type: DataTypes.CHAR(2),
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   },
   cuenta: {
     type: DataTypes.CHAR(15),
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   },
   fecha: {
     type: DataTypes.DATE,
@@ -24,7 +27,8 @@ const NotasCobradasMobile = sequelize.define('NotasCobradasMobile', {
   },
   pago_a_nota: {
     type: DataTypes.CHAR(15),
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   },
   monto: {
     type: DataTypes.DECIMAL(15, 2),
@@ -56,9 +60,15 @@ const NotasCobradasMobile = sequelize.define('NotasCobradasMobile', {
     type: DataTypes.DECIMAL(15, 0),
     allowNull: true
   },
+  cobrador_id: {
+    type: DataTypes.CHAR(2),
+    allowNull: false,
+    primaryKey: true
+  },
   fecha_registro: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   }
 }, {
   tableName: 'mobile_notas_cobradas',

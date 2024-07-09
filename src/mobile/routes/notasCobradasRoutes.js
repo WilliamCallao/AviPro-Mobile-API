@@ -30,6 +30,7 @@ router.post('/sync', syncNotasCobradas);
  * @body {string} [observaciones] - Observaciones (opcional)
  * @body {string} [referencia] - Referencia (opcional)
  * @body {number} [nro_factura] - Número de factura (opcional)
+ * @body {string} cobrador_id - ID del cobrador
  */
 router.post('/register', registerPayment);
 
