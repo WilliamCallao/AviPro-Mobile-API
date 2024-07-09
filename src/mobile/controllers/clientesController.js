@@ -1,4 +1,5 @@
-const ClienteDesktop = require('../../desktop/models/clientesDesktop');
+// controllers/clientesMobileController.js
+
 const ClienteMobile = require('../models/clientesMobile');
 const sequelize = require('../../configs/database');
 
@@ -245,7 +246,7 @@ const getClienteByCuenta = async (req, res) => {
           monto: row.cobrada_monto,
           moneda: row.cobrada_moneda,
           modo_pago: row.cobrada_modo_pago,
-          cta_deposito: row.cobrada_cta_deposito,
+          cta_deposito: row.cta_deposito,
           observaciones: row.cobrada_observaciones,
           nro_factura: row.cobrada_nro_factura,
           fecha_registro: row.cobrada_fecha_registro
@@ -265,17 +266,17 @@ const getClienteByCuenta = async (req, res) => {
     console.error('Error fetching client with pending and paid notes', error);
     res.status(500).send('Error fetching client with pending and paid notes');
   }
-};  
+};
 
-// Endpoint para sincronizar datos desde la tabla de desktop
-const syncClientes = async (req, res) => {
+// Cargar datos desde un archivo JSON
+const uploadJsonData = async (req, res) => {
+  const clients = req.body;
   try {
-    const desktopClientes = await ClienteDesktop.findAll();
     await ClienteMobile.destroy({ where: {} }); // Borra todos los registros existentes
-    const newClientes = await ClienteMobile.bulkCreate(desktopClientes.map(c => c.toJSON())); // Carga los nuevos datos
+    const newClientes = await ClienteMobile.bulkCreate(clients); // Carga los nuevos datos desde el JSON
     res.status(201).json(newClientes);
   } catch (error) {
-    res.status(500).send('Error syncing mobile clients');
+    res.status(500).send('Error loading JSON data');
   }
 };
 
@@ -303,6 +304,6 @@ module.exports = {
   getClientesByEmpresa,
   getClientesConNotasPendientes,
   getClienteByCuenta,
-  syncClientes,
+  uploadJsonData,
   getClienteByEmpresaAndCuenta
 };
