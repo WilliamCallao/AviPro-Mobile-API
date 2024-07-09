@@ -9,7 +9,7 @@ const {
   getClienteByCuenta,
   uploadJsonData,
   getClienteByEmpresaAndCuenta
-} = require('../controllers/clientesAController');
+} = require('../controllers/clientesController');
 
 // Ruta para obtener todos los clientes de móvil
 router.get('/', getClientesMobile);
