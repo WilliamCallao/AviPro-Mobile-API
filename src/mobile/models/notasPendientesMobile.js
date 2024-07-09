@@ -41,6 +41,10 @@ const NotaPendienteMobile = sequelize.define('NotaPendienteMobile', {
   fecha_vence: {
     type: DataTypes.DATE,
     allowNull: true
+  },
+  nro_factura: {
+    type: DataTypes.DECIMAL(15, 0),
+    allowNull: true
   }
 }, {
   tableName: 'mobile_notas_pendientes',

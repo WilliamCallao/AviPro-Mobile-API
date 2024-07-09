@@ -23,6 +23,26 @@ const syncNotasPendientes = async (req, res) => {
   }
 };
 
+// Cargar datos desde un archivo JSON
+const uploadJsonData = async (req, res) => {
+  const notas = req.body;
+  console.log(notas);
+
+  // Asegúrate de que 'nro_factura' es un entero
+  notas.forEach(nota => {
+    nota.nro_factura = parseInt(nota.nro_factura, 10);
+  });
+
+  try {
+    await NotaPendienteMobile.destroy({ where: {} }); // Borra todos los registros existentes
+    const newNotas = await NotaPendienteMobile.bulkCreate(notas); // Carga los nuevos datos desde el JSON
+    res.status(201).json(newNotas);
+  } catch (error) {
+    console.error('Error loading JSON data:', error);
+    res.status(500).send('Error loading JSON data');
+  }
+};
+
 // Actualizar el monto pagado y saldo pendiente de una nota
 const updateNotaPendiente = async (req, res) => {
   const { empresa_id, sucursal_id, cuenta, nro_nota } = req.params;
@@ -62,7 +82,8 @@ const updateNotaPendiente = async (req, res) => {
       monto_pagado: parseFloat(nota.monto_pagado),
       saldo_pendiente: parseFloat(nota.saldo_pendiente),
       fecha_venta: nota.fecha_venta,
-      fecha_vence: nota.fecha_vence
+      fecha_vence: nota.fecha_vence,
+      nro_factura: nota.nro_factura
     });
   } catch (error) {
     res.status(500).send('Error updating note');
@@ -106,6 +127,7 @@ const rollbackNotaPendiente = async (req, res) => {
 module.exports = {
   getNotasPendientesMobile,
   syncNotasPendientes,
+  uploadJsonData,
   updateNotaPendiente,
   rollbackNotaPendiente
 };
