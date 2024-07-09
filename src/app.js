@@ -17,7 +17,7 @@ const mobileNotasPendientesRoutes = require('./mobile/routes/notasPendientesRout
 const mobileCuentasDepositoRoutes = require('./mobile/routes/cuentasDepositoRoutes');
 const mobileNotasCobradasRoutes = require('./mobile/routes/notasCobradasRoutes');
 const historialCobrosRoutes = require('./mobile/routes/historialCobrosRoutes');
-
+const notasRoutes = require('./mobile/routes/notasRoutes');
 const app = express();
 
 app.use(cors());
@@ -37,6 +37,7 @@ app.use('/api/mobile/notas-pendientes', mobileNotasPendientesRoutes);
 app.use('/api/mobile/cuentas-deposito', mobileCuentasDepositoRoutes);
 app.use('/api/mobile/notas-cobradas', mobileNotasCobradasRoutes);
 app.use('/api/mobile/historial-cobros', historialCobrosRoutes);
+app.use('/api/mobile/notas', notasRoutes);
 
 app.get('/api/saludo', (req, res) => {
   console.log(`saludando`);
