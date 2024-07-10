@@ -101,7 +101,7 @@ const getClientesConNotasPendientes = async (req, res) => {
           notas_cobradas: new Set()
         };
       }
-      if (row.nota_nro_nota) {
+      if (row.nota_nro_nota && parseFloat(row.nota_saldo_pendiente) > 0) {
         clientesMap[row.cliente_id].notas_pendientes.add(JSON.stringify({
           empresa_id: row.nota_empresa_id,
           sucursal_id: row.nota_sucursal_id,
@@ -127,7 +127,6 @@ const getClientesConNotasPendientes = async (req, res) => {
           monto: row.cobrada_monto,
           moneda: row.cobrada_moneda,
           modo_pago: row.cobrada_modo_pago,
-          // cta_deposito: row.cobrada_cta_deposito,
           cta_deposito: row.cta_deposito,
           observaciones: row.cobrada_observaciones,
           nro_factura: row.cobrada_nro_factura,
@@ -149,7 +148,6 @@ const getClientesConNotasPendientes = async (req, res) => {
     res.status(500).send('Error fetching clients with pending and paid notes');
   }
 };
-
 
 // Obtener cliente por cuenta con sus notas pendientes y cobradas
 const getClienteByCuenta = async (req, res) => {
@@ -226,7 +224,7 @@ const getClienteByCuenta = async (req, res) => {
           notas_cobradas: new Set()
         };
       }
-      if (row.nota_nro_nota) {
+      if (row.nota_nro_nota && parseFloat(row.nota_saldo_pendiente) > 0) {
         clientesMap[row.cliente_id].notas_pendientes.add(JSON.stringify({
           empresa_id: row.nota_empresa_id,
           sucursal_id: row.nota_sucursal_id,
@@ -273,7 +271,6 @@ const getClienteByCuenta = async (req, res) => {
     res.status(500).send('Error fetching client with pending and paid notes');
   }
 };
-
 
 // Cargar datos desde un archivo JSON
 const uploadJsonData = async (req, res) => {
