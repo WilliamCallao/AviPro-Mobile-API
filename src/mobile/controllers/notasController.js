@@ -77,6 +77,58 @@ const processPayment = async (req, res) => {
   }
 };
 
+// Eliminar una nota pagada y restituir el saldo a la nota pendiente correspondiente
+const deletePaidNote = async (req, res) => {
+  const { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro } = req.body;
+
+  const transaction = await sequelize.transaction();
+
+  try {
+    // Encontrar la nota cobrada
+    const notaCobrada = await NotasCobradasMobile.findOne({
+      where: { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro }
+    });
+
+    if (!notaCobrada) {
+      await transaction.rollback();
+      return res.status(404).send('Nota cobrada no encontrada');
+    }
+
+    const montoRestituir = parseFloat(notaCobrada.monto);
+
+    // Eliminar la nota cobrada
+    await notaCobrada.destroy({ transaction });
+
+    // Encontrar la nota pendiente correspondiente
+    const notaPendiente = await NotaPendienteMobile.findOne({
+      where: { empresa_id, sucursal_id, cuenta, nro_nota: pago_a_nota }
+    });
+
+    if (!notaPendiente) {
+      await transaction.rollback();
+      return res.status(404).send('Nota pendiente no encontrada');
+    }
+
+    // Restablecer el monto pagado y el saldo pendiente
+    const nuevoMontoPagado = parseFloat(notaPendiente.monto_pagado) - montoRestituir;
+    const nuevoSaldoPendiente = parseFloat(notaPendiente.saldo_pendiente) + montoRestituir;
+
+    notaPendiente.monto_pagado = nuevoMontoPagado.toFixed(2);
+    notaPendiente.saldo_pendiente = nuevoSaldoPendiente.toFixed(2);
+
+    await notaPendiente.save({ transaction });
+
+    await transaction.commit();
+
+    res.status(200).send('Nota cobrada eliminada y saldo restituido correctamente');
+  } catch (error) {
+    await transaction.rollback();
+    console.error('Error eliminando nota cobrada:', error);
+    res.status(500).send('Error eliminando nota cobrada');
+  }
+};
+
 module.exports = {
-  processPayment
+  processPayment,
+  deletePaidNote
 };
