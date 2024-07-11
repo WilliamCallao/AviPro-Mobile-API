@@ -1,5 +1,5 @@
 const express = require('express');
-const { processPayment, deletePaidNote } = require('../controllers/notasController');
+const { processPayment, deletePaidNote, editPaidNote } = require('../controllers/notasController');
 
 const router = express.Router();
 
@@ -14,5 +14,8 @@ router.post('/process-payment', processPayment);
  * @desc Eliminar una nota cobrada y restituir el saldo a la nota pendiente correspondiente
  */
 router.delete('/notas-cobradas/delete', deletePaidNote);
+
+router.put('/notas-cobradas/edit', editPaidNote);
+
 
 module.exports = router;

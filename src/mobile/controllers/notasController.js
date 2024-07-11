@@ -1,6 +1,5 @@
 const NotasCobradasMobile = require('../models/notasCobradasMobile');
 const NotaPendienteMobile = require('../models/notasPendientesMobile');
-const ClienteMobile = require('../models/clientesMobile');
 const sequelize = require('../../configs/database');
 const moment = require('moment-timezone');
 
@@ -84,51 +83,132 @@ const deletePaidNote = async (req, res) => {
   const transaction = await sequelize.transaction();
 
   try {
-    // Encontrar la nota cobrada
-    const notaCobrada = await NotasCobradasMobile.findOne({
+    // Buscar la nota cobrada
+    const paidNote = await NotasCobradasMobile.findOne({
       where: { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro }
     });
 
-    if (!notaCobrada) {
+    if (!paidNote) {
       await transaction.rollback();
       return res.status(404).send('Nota cobrada no encontrada');
     }
 
-    const montoRestituir = parseFloat(notaCobrada.monto);
+    const montoPagadoFloat = parseFloat(paidNote.monto);
 
-    // Eliminar la nota cobrada
-    await notaCobrada.destroy({ transaction });
-
-    // Encontrar la nota pendiente correspondiente
-    const notaPendiente = await NotaPendienteMobile.findOne({
+    // Buscar la nota pendiente asociada
+    const pendingNote = await NotaPendienteMobile.findOne({
       where: { empresa_id, sucursal_id, cuenta, nro_nota: pago_a_nota }
     });
 
-    if (!notaPendiente) {
+    if (!pendingNote) {
       await transaction.rollback();
       return res.status(404).send('Nota pendiente no encontrada');
     }
 
-    // Restablecer el monto pagado y el saldo pendiente
-    const nuevoMontoPagado = parseFloat(notaPendiente.monto_pagado) - montoRestituir;
-    const nuevoSaldoPendiente = parseFloat(notaPendiente.saldo_pendiente) + montoRestituir;
+    // Actualizar el monto pagado y el saldo pendiente de la nota pendiente
+    pendingNote.monto_pagado = (parseFloat(pendingNote.monto_pagado) - montoPagadoFloat).toFixed(2);
+    pendingNote.saldo_pendiente = (parseFloat(pendingNote.saldo_pendiente) + montoPagadoFloat).toFixed(2);
 
-    notaPendiente.monto_pagado = nuevoMontoPagado.toFixed(2);
-    notaPendiente.saldo_pendiente = nuevoSaldoPendiente.toFixed(2);
+    await pendingNote.save({ transaction });
 
-    await notaPendiente.save({ transaction });
+    // Eliminar la nota cobrada
+    await paidNote.destroy({ transaction });
 
     await transaction.commit();
 
-    res.status(200).send('Nota cobrada eliminada y saldo restituido correctamente');
+    res.status(200).send('Nota cobrada eliminada correctamente');
   } catch (error) {
     await transaction.rollback();
-    console.error('Error eliminando nota cobrada:', error);
-    res.status(500).send('Error eliminando nota cobrada');
+    console.error('Error deleting paid note:', error);
+    res.status(500).send('Error deleting paid note');
+  }
+};
+
+// Editar una nota pagada y actualizar la nota pendiente correspondiente
+const editPaidNote = async (req, res) => {
+  const {
+    empresa_id,
+    sucursal_id,
+    cuenta,
+    fecha,
+    referencia,
+    pago_a_nota,
+    monto,
+    moneda,
+    modo_pago,
+    cta_deposito,
+    observaciones,
+    nro_factura,
+    cobrador_id,
+    fecha_registro
+  } = req.body;
+
+  const transaction = await sequelize.transaction();
+
+  try {
+    // Buscar la nota cobrada
+    const paidNote = await NotasCobradasMobile.findOne({
+      where: { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro }
+    });
+
+    if (!paidNote) {
+      await transaction.rollback();
+      return res.status(404).send('Nota cobrada no encontrada');
+    }
+
+    // Buscar la nota pendiente asociada
+    const pendingNote = await NotaPendienteMobile.findOne({
+      where: { empresa_id, sucursal_id, cuenta, nro_nota: pago_a_nota }
+    });
+
+    if (!pendingNote) {
+      await transaction.rollback();
+      return res.status(404).send('Nota pendiente no encontrada');
+    }
+
+    const montoAnteriorFloat = parseFloat(paidNote.monto);
+    const montoNuevoFloat = parseFloat(monto);
+    const diferenciaMonto = montoNuevoFloat - montoAnteriorFloat;
+
+    // Actualizar la nota pagada
+    paidNote.fecha = fecha || paidNote.fecha;
+    paidNote.referencia = referencia || paidNote.referencia;
+    paidNote.monto = montoNuevoFloat;
+    paidNote.moneda = moneda || paidNote.moneda;
+    paidNote.modo_pago = modo_pago || paidNote.modo_pago;
+    paidNote.cta_deposito = cta_deposito || paidNote.cta_deposito;
+    paidNote.observaciones = observaciones || paidNote.observaciones;
+    paidNote.nro_factura = nro_factura || paidNote.nro_factura;
+    paidNote.cobrador_id = cobrador_id || paidNote.cobrador_id;
+
+    await paidNote.save({ transaction });
+
+    // Actualizar la nota pendiente asociada
+    const nuevoMontoPagado = parseFloat(pendingNote.monto_pagado) + diferenciaMonto;
+    const nuevoSaldoPendiente = parseFloat(pendingNote.importe_nota) - nuevoMontoPagado;
+
+    if (nuevoSaldoPendiente < 0) {
+      await transaction.rollback();
+      return res.status(400).send('El monto pagado excede el saldo pendiente');
+    }
+
+    pendingNote.monto_pagado = nuevoMontoPagado.toFixed(2);
+    pendingNote.saldo_pendiente = nuevoSaldoPendiente.toFixed(2);
+
+    await pendingNote.save({ transaction });
+
+    await transaction.commit();
+
+    res.status(200).json(paidNote);
+  } catch (error) {
+    await transaction.rollback();
+    console.error('Error editing paid note:', error);
+    res.status(500).send('Error editing paid note');
   }
 };
 
 module.exports = {
   processPayment,
-  deletePaidNote
+  deletePaidNote,
+  editPaidNote
 };
