@@ -18,6 +18,7 @@ const mobileCuentasDepositoRoutes = require('./mobile/routes/cuentasDepositoRout
 const mobileNotasCobradasRoutes = require('./mobile/routes/notasCobradasRoutes');
 const historialCobrosRoutes = require('./mobile/routes/historialCobrosRoutes');
 const notasRoutes = require('./mobile/routes/notasRoutes');
+const moment = require('moment-timezone');
 const app = express();
 
 app.use(cors());
@@ -46,6 +47,11 @@ app.get('/api/saludo', (req, res) => {
 
 app.get('/', (req, res) => {
   res.send('Servidor en funcionamiento');
+});
+
+app.get('/fecha-servidor', (req, res) => {
+  const fechaServidor = moment().tz('America/La_Paz').format('YYYY-MM-DD');
+  res.json({ fechaServidor });
 });
 
 // Sincroniza los modelos con la base de datos
