@@ -38,6 +38,10 @@ const HistorialCobros = sequelize.define('HistorialCobros', {
         type: DataTypes.STRING(255),
         allowNull: true,
     },
+    pago_a_nota: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+    },
 }, {
     timestamps: false,
     tableName: 'mobile_historial_cobros'
