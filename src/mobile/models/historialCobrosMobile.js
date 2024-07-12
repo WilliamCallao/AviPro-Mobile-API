@@ -10,6 +10,10 @@ const HistorialCobros = sequelize.define('HistorialCobros', {
         type: DataTypes.CHAR(2),
         allowNull: false,
     },
+    cuenta: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+    },
     nombre_cliente: {
         type: DataTypes.STRING(50),
         allowNull: false,

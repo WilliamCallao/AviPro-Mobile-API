@@ -3,13 +3,14 @@ const moment = require('moment-timezone');
 const { Op } = require('sequelize');
 
 const crearRegistro = async (req, res) => {
-    const { empresa_id, cobrador_id, nombre_cliente, monto, accion, observaciones } = req.body;
+    const { empresa_id, cobrador_id, cuenta, nombre_cliente, monto, accion, observaciones } = req.body;
     try {
         const fechaHoraBolivia = moment().tz('America/La_Paz');
 
         const nuevoRegistro = await HistorialCobros.create({
             empresa_id,
             cobrador_id,
+            cuenta,
             nombre_cliente,
             monto,
             fecha: fechaHoraBolivia.format('YYYY-MM-DD'),
