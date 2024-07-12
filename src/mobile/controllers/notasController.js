@@ -29,7 +29,7 @@ const processPayment = async (req, res) => {
       empresa_id,
       sucursal_id,
       cuenta,
-      fecha: fecha || new Date(),
+      fecha: fecha || moment().tz('America/La_Paz').format('YYYY-MM-DD'),
       referencia: referencia || null,
       pago_a_nota,
       monto,
@@ -39,7 +39,7 @@ const processPayment = async (req, res) => {
       observaciones: observaciones || null,
       nro_factura: nro_factura || null,
       cobrador_id,
-      fecha_registro: moment().tz('America/La_Paz').format()
+      fecha_registro: moment().tz('America/La_Paz').format('YYYY-MM-DD'),
     }, { transaction });
 
     // Actualizar la nota pendiente
