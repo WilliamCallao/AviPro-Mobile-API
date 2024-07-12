@@ -1,5 +1,6 @@
 const NotasCobradasMobile = require('../models/notasCobradasMobile');
 const NotaPendienteMobile = require('../models/notasPendientesMobile');
+const HistorialCobros = require('../models/historialCobrosMobile');
 const sequelize = require('../../configs/database');
 const moment = require('moment-timezone');
 
@@ -18,7 +19,8 @@ const processPayment = async (req, res) => {
     cta_deposito,
     observaciones,
     nro_factura,
-    cobrador_id
+    cobrador_id,
+    nombre_cliente
   } = req.body;
 
   const transaction = await sequelize.transaction();
@@ -66,6 +68,21 @@ const processPayment = async (req, res) => {
 
     await nota.save({ transaction });
 
+    // Crear registro en el historial de cobros
+    const fechaHoraBolivia = moment().tz('America/La_Paz');
+    await HistorialCobros.create({
+      empresa_id,
+      cobrador_id,
+      cuenta,
+      nombre_cliente,
+      monto,
+      fecha: fechaHoraBolivia.format('YYYY-MM-DD'),
+      hora: fechaHoraBolivia.format('HH:mm:ss'),
+      accion: 'Cobro de nota',
+      observaciones,
+      pago_a_nota
+    }, { transaction });
+
     await transaction.commit();
 
     res.status(201).json(newPayment);
@@ -78,7 +95,7 @@ const processPayment = async (req, res) => {
 
 // Eliminar una nota pagada y restituir el saldo a la nota pendiente correspondiente
 const deletePaidNote = async (req, res) => {
-  const { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro } = req.body;
+  const { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro, nombre_cliente, cobrador_id } = req.body;
 
   const transaction = await sequelize.transaction();
 
@@ -114,6 +131,21 @@ const deletePaidNote = async (req, res) => {
     // Eliminar la nota cobrada
     await paidNote.destroy({ transaction });
 
+    // Crear registro en el historial de cobros
+    const fechaHoraBolivia = moment().tz('America/La_Paz');
+    await HistorialCobros.create({
+      empresa_id,
+      cobrador_id,
+      cuenta,
+      nombre_cliente,
+      monto: montoPagadoFloat,
+      fecha: fechaHoraBolivia.format('YYYY-MM-DD'),
+      hora: fechaHoraBolivia.format('HH:mm:ss'),
+      accion: 'Eliminación de nota cobrada',
+      observaciones: '',
+      pago_a_nota
+    }, { transaction });
+
     await transaction.commit();
 
     res.status(200).send('Nota cobrada eliminada correctamente');
@@ -140,7 +172,8 @@ const editPaidNote = async (req, res) => {
     observaciones,
     nro_factura,
     cobrador_id,
-    fecha_registro
+    fecha_registro,
+    nombre_cliente
   } = req.body;
 
   const transaction = await sequelize.transaction();
@@ -196,6 +229,21 @@ const editPaidNote = async (req, res) => {
     pendingNote.saldo_pendiente = nuevoSaldoPendiente.toFixed(2);
 
     await pendingNote.save({ transaction });
+
+    // Crear registro en el historial de cobros
+    const fechaHoraBolivia = moment().tz('America/La_Paz');
+    await HistorialCobros.create({
+      empresa_id,
+      cobrador_id,
+      cuenta,
+      nombre_cliente,
+      monto: diferenciaMonto,
+      fecha: fechaHoraBolivia.format('YYYY-MM-DD'),
+      hora: fechaHoraBolivia.format('HH:mm:ss'),
+      accion: 'Edición de nota cobrada',
+      observaciones,
+      pago_a_nota
+    }, { transaction });
 
     await transaction.commit();
 
