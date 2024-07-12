@@ -34,7 +34,7 @@ const LogsDesktop = sequelize.define('LogsDesktop', {
     allowNull: true
   }
 }, {
-  tableName: 'desktop_desktop',
+  tableName: 'desktop_logs',
   timestamps: false
 });
 
