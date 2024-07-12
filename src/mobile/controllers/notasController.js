@@ -240,7 +240,8 @@ const editPaidNote = async (req, res) => {
     });
 
     if (historialRegistro) {
-      historialRegistro.monto += diferenciaMonto;
+      const nuevoMontoHistorial = parseFloat(historialRegistro.monto) + diferenciaMonto;
+      historialRegistro.monto = nuevoMontoHistorial.toFixed(2);
       historialRegistro.observaciones = observaciones || historialRegistro.observaciones;
       await historialRegistro.save({ transaction });
     }
