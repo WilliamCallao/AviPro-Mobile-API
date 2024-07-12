@@ -9,6 +9,8 @@ const historialCobrosController = require('../controllers/historialCobrosControl
  * @body {string} cobrador_id - ID del cobrador (obligatorio)
  * @body {string} nombre_cliente - Nombre del cliente (obligatorio)
  * @body {number} monto - Monto del cobro (obligatorio)
+ * @body {string} accion - Acción realizada (obligatorio)
+ * @body {string} [observaciones] - Observaciones adicionales (opcional)
  * @returns {object} 201 - El nuevo registro creado
  * @returns {Error} 500 - Error al crear el registro
  * @example body:
@@ -16,7 +18,9 @@ const historialCobrosController = require('../controllers/historialCobrosControl
  *   "empresa_id": "01",
  *   "cobrador_id": "02",
  *   "nombre_cliente": "Juan Pérez",
- *   "monto": 1500.50
+ *   "monto": 1500.50,
+ *   "accion": "Cobro realizado",
+ *   "observaciones": "Pago en efectivo"
  * }
  */
 router.post('/', historialCobrosController.crearRegistro);

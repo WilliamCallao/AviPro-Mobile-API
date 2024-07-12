@@ -26,6 +26,14 @@ const HistorialCobros = sequelize.define('HistorialCobros', {
         type: DataTypes.DECIMAL(15, 2),
         allowNull: false,
     },
+    accion: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+    },
+    observaciones: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+    },
 }, {
     timestamps: false,
     tableName: 'mobile_historial_cobros'
