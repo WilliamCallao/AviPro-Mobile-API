@@ -131,20 +131,17 @@ const deletePaidNote = async (req, res) => {
     // Eliminar la nota cobrada
     await paidNote.destroy({ transaction });
 
-    // Crear registro en el historial de cobros
-    const fechaHoraBolivia = moment().tz('America/La_Paz');
-    await HistorialCobros.create({
-      empresa_id,
-      cobrador_id,
-      cuenta,
-      nombre_cliente,
-      monto: montoPagadoFloat,
-      fecha: fechaHoraBolivia.format('YYYY-MM-DD'),
-      hora: fechaHoraBolivia.format('HH:mm:ss'),
-      accion: 'Eliminación de nota cobrada',
-      observaciones: '',
-      pago_a_nota
-    }, { transaction });
+    // Eliminar el registro en el historial de cobros
+    await HistorialCobros.destroy({
+      where: {
+        empresa_id,
+        cobrador_id,
+        cuenta,
+        pago_a_nota,
+        accion: 'Cobro de nota'
+      },
+      transaction
+    });
 
     await transaction.commit();
 
@@ -230,20 +227,23 @@ const editPaidNote = async (req, res) => {
 
     await pendingNote.save({ transaction });
 
-    // Crear registro en el historial de cobros
-    const fechaHoraBolivia = moment().tz('America/La_Paz');
-    await HistorialCobros.create({
-      empresa_id,
-      cobrador_id,
-      cuenta,
-      nombre_cliente,
-      monto: diferenciaMonto,
-      fecha: fechaHoraBolivia.format('YYYY-MM-DD'),
-      hora: fechaHoraBolivia.format('HH:mm:ss'),
-      accion: 'Edición de nota cobrada',
-      observaciones,
-      pago_a_nota
-    }, { transaction });
+    // Actualizar el registro en el historial de cobros
+    const historialRegistro = await HistorialCobros.findOne({
+      where: {
+        empresa_id,
+        cobrador_id,
+        cuenta,
+        pago_a_nota,
+        accion: 'Cobro de nota'
+      },
+      transaction
+    });
+
+    if (historialRegistro) {
+      historialRegistro.monto += diferenciaMonto;
+      historialRegistro.observaciones = observaciones || historialRegistro.observaciones;
+      await historialRegistro.save({ transaction });
+    }
 
     await transaction.commit();
 
