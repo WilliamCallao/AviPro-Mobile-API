@@ -188,7 +188,8 @@ const getClienteByCuenta = async (req, res) => {
         nc.cta_deposito AS cobrada_cta_deposito,
         nc.observaciones AS cobrada_observaciones,
         nc.nro_factura AS cobrada_nro_factura,
-        nc.fecha_registro AS cobrada_fecha_registro
+        nc.fecha_registro AS cobrada_fecha_registro,
+        nc.cobrador_id AS cobrada_cobrador_id
       FROM
         mobile_clientes c
       LEFT JOIN
@@ -225,6 +226,7 @@ const getClienteByCuenta = async (req, res) => {
         };
       }
       if (row.nota_nro_nota && parseFloat(row.nota_saldo_pendiente) > 0) {
+      // if (row.nota_nro_nota) {
         clientesMap[row.cliente_id].notas_pendientes.add(JSON.stringify({
           empresa_id: row.nota_empresa_id,
           sucursal_id: row.nota_sucursal_id,
@@ -250,10 +252,11 @@ const getClienteByCuenta = async (req, res) => {
           monto: row.cobrada_monto,
           moneda: row.cobrada_moneda,
           modo_pago: row.cobrada_modo_pago,
-          cta_deposito: row.cta_deposito,
+          cta_deposito: row.cobrada_cta_deposito,
           observaciones: row.cobrada_observaciones,
           nro_factura: row.cobrada_nro_factura,
-          fecha_registro: row.cobrada_fecha_registro
+          fecha_registro: row.cobrada_fecha_registro,
+          cobrador_id: row.cobrada_cobrador_id
         }));
       }
     });

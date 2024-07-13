@@ -15,7 +15,7 @@ const NotaPendienteMobile = sequelize.define('NotaPendienteMobile', {
     allowNull: false
   },
   fecha: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false
   },
   nro_nota: {
@@ -35,11 +35,11 @@ const NotaPendienteMobile = sequelize.define('NotaPendienteMobile', {
     allowNull: true
   },
   fecha_venta: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: true
   },
   fecha_vence: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: true
   },
   nro_factura: {
