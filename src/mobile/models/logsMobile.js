@@ -5,13 +5,14 @@ const moment = require('moment-timezone');
 
 const LogsMobile = sequelize.define('LogsMobile', {
     codigo_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true
     },
     registro: {
         type: DataTypes.DATE,
         allowNull: false,
+        primaryKey: true,
         defaultValue: () => moment().tz('America/La_Paz').format('YYYY-MM-DD HH:mm:ss')
     },
     empresa_id: {
