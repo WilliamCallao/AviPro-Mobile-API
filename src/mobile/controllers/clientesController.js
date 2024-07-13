@@ -1,4 +1,5 @@
-const ClienteDesktop = require('../../desktop/models/clientesDesktop');
+// controllers/clientesMobileController.js
+
 const ClienteMobile = require('../models/clientesMobile');
 const sequelize = require('../../configs/database');
 
@@ -51,6 +52,7 @@ const getClientesConNotasPendientes = async (req, res) => {
         np.saldo_pendiente AS nota_saldo_pendiente,
         np.fecha_venta AS nota_fecha_venta,
         np.fecha_vence AS nota_fecha_vence,
+        np.nro_factura AS nota_nro_factura,
         nc.empresa_id AS cobrada_empresa_id,
         nc.sucursal_id AS cobrada_sucursal_id,
         nc.cuenta AS cobrada_cuenta,
@@ -99,7 +101,7 @@ const getClientesConNotasPendientes = async (req, res) => {
           notas_cobradas: new Set()
         };
       }
-      if (row.nota_nro_nota) {
+      if (row.nota_nro_nota && parseFloat(row.nota_saldo_pendiente) > 0) {
         clientesMap[row.cliente_id].notas_pendientes.add(JSON.stringify({
           empresa_id: row.nota_empresa_id,
           sucursal_id: row.nota_sucursal_id,
@@ -110,7 +112,8 @@ const getClientesConNotasPendientes = async (req, res) => {
           monto_pagado: row.nota_monto_pagado,
           saldo_pendiente: row.nota_saldo_pendiente,
           fecha_venta: row.nota_fecha_venta,
-          fecha_vence: row.nota_fecha_vence
+          fecha_vence: row.nota_fecha_vence,
+          nro_factura: row.nota_nro_factura
         }));
       }
       if (row.cobrada_fecha) {
@@ -124,7 +127,7 @@ const getClientesConNotasPendientes = async (req, res) => {
           monto: row.cobrada_monto,
           moneda: row.cobrada_moneda,
           modo_pago: row.cobrada_modo_pago,
-          cta_deposito: row.cobrada_cta_deposito,
+          cta_deposito: row.cta_deposito,
           observaciones: row.cobrada_observaciones,
           nro_factura: row.cobrada_nro_factura,
           fecha_registro: row.cobrada_fecha_registro
@@ -172,6 +175,7 @@ const getClienteByCuenta = async (req, res) => {
         np.saldo_pendiente AS nota_saldo_pendiente,
         np.fecha_venta AS nota_fecha_venta,
         np.fecha_vence AS nota_fecha_vence,
+        np.nro_factura AS nota_nro_factura,
         nc.empresa_id AS cobrada_empresa_id,
         nc.sucursal_id AS cobrada_sucursal_id,
         nc.cuenta AS cobrada_cuenta,
@@ -184,7 +188,8 @@ const getClienteByCuenta = async (req, res) => {
         nc.cta_deposito AS cobrada_cta_deposito,
         nc.observaciones AS cobrada_observaciones,
         nc.nro_factura AS cobrada_nro_factura,
-        nc.fecha_registro AS cobrada_fecha_registro
+        nc.fecha_registro AS cobrada_fecha_registro,
+        nc.cobrador_id AS cobrada_cobrador_id
       FROM
         mobile_clientes c
       LEFT JOIN
@@ -220,7 +225,8 @@ const getClienteByCuenta = async (req, res) => {
           notas_cobradas: new Set()
         };
       }
-      if (row.nota_nro_nota) {
+      if (row.nota_nro_nota && parseFloat(row.nota_saldo_pendiente) > 0) {
+      // if (row.nota_nro_nota) {
         clientesMap[row.cliente_id].notas_pendientes.add(JSON.stringify({
           empresa_id: row.nota_empresa_id,
           sucursal_id: row.nota_sucursal_id,
@@ -231,7 +237,8 @@ const getClienteByCuenta = async (req, res) => {
           monto_pagado: row.nota_monto_pagado,
           saldo_pendiente: row.nota_saldo_pendiente,
           fecha_venta: row.nota_fecha_venta,
-          fecha_vence: row.nota_fecha_vence
+          fecha_vence: row.nota_fecha_vence,
+          nro_factura: row.nota_nro_factura
         }));
       }
       if (row.cobrada_fecha) {
@@ -248,7 +255,8 @@ const getClienteByCuenta = async (req, res) => {
           cta_deposito: row.cobrada_cta_deposito,
           observaciones: row.cobrada_observaciones,
           nro_factura: row.cobrada_nro_factura,
-          fecha_registro: row.cobrada_fecha_registro
+          fecha_registro: row.cobrada_fecha_registro,
+          cobrador_id: row.cobrada_cobrador_id
         }));
       }
     });
@@ -265,17 +273,17 @@ const getClienteByCuenta = async (req, res) => {
     console.error('Error fetching client with pending and paid notes', error);
     res.status(500).send('Error fetching client with pending and paid notes');
   }
-};  
+};
 
-// Endpoint para sincronizar datos desde la tabla de desktop
-const syncClientes = async (req, res) => {
+// Cargar datos desde un archivo JSON
+const uploadJsonData = async (req, res) => {
+  const clients = req.body;
   try {
-    const desktopClientes = await ClienteDesktop.findAll();
     await ClienteMobile.destroy({ where: {} }); // Borra todos los registros existentes
-    const newClientes = await ClienteMobile.bulkCreate(desktopClientes.map(c => c.toJSON())); // Carga los nuevos datos
+    const newClientes = await ClienteMobile.bulkCreate(clients); // Carga los nuevos datos desde el JSON
     res.status(201).json(newClientes);
   } catch (error) {
-    res.status(500).send('Error syncing mobile clients');
+    res.status(500).send('Error loading JSON data');
   }
 };
 
@@ -303,6 +311,6 @@ module.exports = {
   getClientesByEmpresa,
   getClientesConNotasPendientes,
   getClienteByCuenta,
-  syncClientes,
+  uploadJsonData,
   getClienteByEmpresaAndCuenta
 };

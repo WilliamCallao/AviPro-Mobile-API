@@ -1,5 +1,7 @@
+// routes/notasPendientesRoutes.js
+
 const express = require('express');
-const { getNotasPendientesMobile, syncNotasPendientes, updateNotaPendiente, rollbackNotaPendiente } = require('../controllers/notasPendientesController');
+const { getNotasPendientesMobile, syncNotasPendientes, uploadJsonData, updateNotaPendiente, rollbackNotaPendiente } = require('../controllers/notasPendientesController');
 
 const router = express.Router();
 
@@ -14,6 +16,12 @@ router.get('/', getNotasPendientesMobile);
  * @desc Sincronizar datos desde la tabla de desktop
  */
 router.post('/sync', syncNotasPendientes);
+
+/**
+ * @route POST /api/mobile/notas-pendientes/upload-json
+ * @desc Cargar datos desde un archivo JSON
+ */
+router.post('/upload-json', uploadJsonData);
 
 /**
  * @route PUT /api/mobile/notas-pendientes/:empresa_id/:sucursal_id/:cuenta/:nro_nota

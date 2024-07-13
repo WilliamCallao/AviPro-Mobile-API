@@ -2,6 +2,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../configs/database');
 
 const NotasCobradasMobile = sequelize.define('NotasCobradasMobile', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   empresa_id: {
     type: DataTypes.CHAR(2),
     allowNull: false
@@ -15,7 +20,7 @@ const NotasCobradasMobile = sequelize.define('NotasCobradasMobile', {
     allowNull: false
   },
   fecha: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false
   },
   referencia: {
@@ -56,8 +61,12 @@ const NotasCobradasMobile = sequelize.define('NotasCobradasMobile', {
     type: DataTypes.DECIMAL(15, 0),
     allowNull: true
   },
+  cobrador_id: {
+    type: DataTypes.CHAR(2),
+    allowNull: false
+  },
   fecha_registro: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false
   }
 }, {

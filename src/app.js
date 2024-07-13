@@ -16,8 +16,10 @@ const mobileClientesRoutes = require('./mobile/routes/clientesRoutes');
 const mobileNotasPendientesRoutes = require('./mobile/routes/notasPendientesRoutes');
 const mobileCuentasDepositoRoutes = require('./mobile/routes/cuentasDepositoRoutes');
 const mobileNotasCobradasRoutes = require('./mobile/routes/notasCobradasRoutes');
+const mobileLogsRoutes = require('./mobile/routes/logsRoutes');
 const historialCobrosRoutes = require('./mobile/routes/historialCobrosRoutes');
-
+const notasRoutes = require('./mobile/routes/notasRoutes');
+const moment = require('moment-timezone');
 const app = express();
 
 app.use(cors());
@@ -37,6 +39,8 @@ app.use('/api/mobile/notas-pendientes', mobileNotasPendientesRoutes);
 app.use('/api/mobile/cuentas-deposito', mobileCuentasDepositoRoutes);
 app.use('/api/mobile/notas-cobradas', mobileNotasCobradasRoutes);
 app.use('/api/mobile/historial-cobros', historialCobrosRoutes);
+app.use('/api/mobile/notas', notasRoutes);
+app.use('/api/mobile/logs', mobileLogsRoutes);
 
 app.get('/api/saludo', (req, res) => {
   console.log(`saludando`);
@@ -45,6 +49,11 @@ app.get('/api/saludo', (req, res) => {
 
 app.get('/', (req, res) => {
   res.send('Servidor en funcionamiento');
+});
+
+app.get('/fecha-servidor', (req, res) => {
+  const fechaServidor = moment().tz('America/La_Paz').format('YYYY-MM-DD');
+  res.json({ fechaServidor });
 });
 
 // Sincroniza los modelos con la base de datos
