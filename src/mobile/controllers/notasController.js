@@ -80,7 +80,8 @@ const processPayment = async (req, res) => {
       hora: fechaHoraBolivia.format('HH:mm:ss'),
       accion: 'Cobro de nota',
       observaciones,
-      pago_a_nota
+      pago_a_nota,
+      id_notaCobrada: newPayment.id
     }, { transaction });
 
     await transaction.commit();
@@ -138,6 +139,7 @@ const deletePaidNote = async (req, res) => {
         cobrador_id,
         cuenta,
         pago_a_nota,
+        id_notaCobrada: id,
         accion: 'Cobro de nota'
       },
       transaction
@@ -234,6 +236,7 @@ const editPaidNote = async (req, res) => {
         cobrador_id,
         cuenta,
         pago_a_nota,
+        id_notaCobrada: id,
         accion: 'Cobro de nota'
       },
       transaction
