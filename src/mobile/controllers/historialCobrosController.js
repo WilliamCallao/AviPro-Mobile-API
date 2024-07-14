@@ -3,7 +3,7 @@ const moment = require('moment-timezone');
 const { Op } = require('sequelize');
 
 const crearRegistro = async (req, res) => {
-    const { empresa_id, cobrador_id, cuenta, nombre_cliente, monto, accion, observaciones, pago_a_nota } = req.body;
+    const { empresa_id, cobrador_id, cuenta, nombre_cliente, monto, accion, observaciones, pago_a_nota, id_notaCobrada } = req.body;
     try {
         const fechaHoraBolivia = moment().tz('America/La_Paz');
 
@@ -18,6 +18,7 @@ const crearRegistro = async (req, res) => {
             accion,
             observaciones,
             pago_a_nota,
+            id_notaCobrada
         });
 
         res.status(201).json(nuevoRegistro);
@@ -75,7 +76,7 @@ const obtenerRegistros = async (req, res) => {
 };
 
 const editarRegistroHistorial = async (req, res) => {
-    const { empresa_id, cobrador_id, cuenta, pago_a_nota, monto, observaciones } = req.body;
+    const { empresa_id, cobrador_id, cuenta, pago_a_nota, monto, observaciones, id_notaCobrada } = req.body;
     const fechaServidor = moment().tz('America/La_Paz').format('YYYY-MM-DD');
 
     try {
@@ -85,7 +86,8 @@ const editarRegistroHistorial = async (req, res) => {
                 cobrador_id,
                 cuenta,
                 pago_a_nota,
-                fecha: fechaServidor
+                fecha: fechaServidor,
+                id_notaCobrada
             }
         });
 
@@ -105,7 +107,7 @@ const editarRegistroHistorial = async (req, res) => {
 };
 
 const eliminarRegistroHistorial = async (req, res) => {
-    const { empresa_id, cobrador_id, cuenta, pago_a_nota } = req.body;
+    const { empresa_id, cobrador_id, cuenta, pago_a_nota, id_notaCobrada } = req.body;
     const fechaServidor = moment().tz('America/La_Paz').format('YYYY-MM-DD');
 
     try {
@@ -115,7 +117,8 @@ const eliminarRegistroHistorial = async (req, res) => {
                 cobrador_id,
                 cuenta,
                 pago_a_nota,
-                fecha: fechaServidor
+                fecha: fechaServidor,
+                id_notaCobrada
             }
         });
 
