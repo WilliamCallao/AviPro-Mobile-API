@@ -53,6 +53,7 @@ const getClientesConNotasPendientes = async (req, res) => {
         np.fecha_venta AS nota_fecha_venta,
         np.fecha_vence AS nota_fecha_vence,
         np.nro_factura AS nota_nro_factura,
+        nc.id AS cobrada_id,
         nc.empresa_id AS cobrada_empresa_id,
         nc.sucursal_id AS cobrada_sucursal_id,
         nc.cuenta AS cobrada_cuenta,
@@ -118,6 +119,7 @@ const getClientesConNotasPendientes = async (req, res) => {
       }
       if (row.cobrada_fecha) {
         clientesMap[row.cliente_id].notas_cobradas.add(JSON.stringify({
+          id: row.cobrada_id,
           empresa_id: row.cobrada_empresa_id,
           sucursal_id: row.cobrada_sucursal_id,
           cuenta: row.cobrada_cuenta,
@@ -176,6 +178,7 @@ const getClienteByCuenta = async (req, res) => {
         np.fecha_venta AS nota_fecha_venta,
         np.fecha_vence AS nota_fecha_vence,
         np.nro_factura AS nota_nro_factura,
+        nc.id AS cobrada_id,
         nc.empresa_id AS cobrada_empresa_id,
         nc.sucursal_id AS cobrada_sucursal_id,
         nc.cuenta AS cobrada_cuenta,
@@ -243,6 +246,7 @@ const getClienteByCuenta = async (req, res) => {
       }
       if (row.cobrada_fecha) {
         clientesMap[row.cliente_id].notas_cobradas.add(JSON.stringify({
+          id: row.cobrada_id,
           empresa_id: row.cobrada_empresa_id,
           sucursal_id: row.cobrada_sucursal_id,
           cuenta: row.cobrada_cuenta,
