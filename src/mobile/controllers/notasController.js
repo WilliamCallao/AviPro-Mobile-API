@@ -95,14 +95,14 @@ const processPayment = async (req, res) => {
 
 // Eliminar una nota pagada y restituir el saldo a la nota pendiente correspondiente
 const deletePaidNote = async (req, res) => {
-  const { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro, nombre_cliente, cobrador_id } = req.body;
+  const { id, empresa_id, sucursal_id, cuenta, pago_a_nota, nombre_cliente, cobrador_id } = req.body;
 
   const transaction = await sequelize.transaction();
 
   try {
     // Buscar la nota cobrada
     const paidNote = await NotasCobradasMobile.findOne({
-      where: { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro }
+      where: { id, empresa_id, sucursal_id, cuenta, pago_a_nota }
     });
 
     if (!paidNote) {
@@ -156,6 +156,7 @@ const deletePaidNote = async (req, res) => {
 // Editar una nota pagada y actualizar la nota pendiente correspondiente
 const editPaidNote = async (req, res) => {
   const {
+    id,
     empresa_id,
     sucursal_id,
     cuenta,
@@ -169,7 +170,6 @@ const editPaidNote = async (req, res) => {
     observaciones,
     nro_factura,
     cobrador_id,
-    fecha_registro,
     nombre_cliente
   } = req.body;
 
@@ -178,7 +178,7 @@ const editPaidNote = async (req, res) => {
   try {
     // Buscar la nota cobrada
     const paidNote = await NotasCobradasMobile.findOne({
-      where: { empresa_id, sucursal_id, cuenta, pago_a_nota, fecha_registro }
+      where: { id, empresa_id, sucursal_id, cuenta, pago_a_nota }
     });
 
     if (!paidNote) {
