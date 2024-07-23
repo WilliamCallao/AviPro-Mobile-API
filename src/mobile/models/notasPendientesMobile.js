@@ -3,7 +3,7 @@ const sequelize = require('../../configs/database');
 
 const NotaPendienteMobile = sequelize.define('NotaPendienteMobile', {
   empresa_id: {
-    type: DataTypes.CHAR(2),
+    type: DataTypes.CHAR(3),
     allowNull: false
   },
   sucursal_id: {

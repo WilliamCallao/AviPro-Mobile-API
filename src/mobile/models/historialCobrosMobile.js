@@ -3,7 +3,7 @@ const sequelize = require('../../configs/database');
 
 const HistorialCobros = sequelize.define('HistorialCobros', {
     empresa_id: {
-        type: DataTypes.CHAR(2),
+        type: DataTypes.CHAR(3),
         allowNull: false,
     },
     cobrador_id: {

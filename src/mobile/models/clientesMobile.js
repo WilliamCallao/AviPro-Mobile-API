@@ -3,7 +3,7 @@ const sequelize = require('../../configs/database');
 
 const ClienteMobile = sequelize.define('ClienteMobile', {
   empresa_id: {
-    type: DataTypes.CHAR(2),
+    type: DataTypes.CHAR(3),
     allowNull: false
   },
   sucursal_id: {

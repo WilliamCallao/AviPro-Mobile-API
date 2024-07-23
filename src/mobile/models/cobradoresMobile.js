@@ -7,7 +7,7 @@ const CobradorMobile = sequelize.define('CobradorMobile', {
     allowNull: false
   },
   empresa_id: {
-    type: DataTypes.CHAR(2),
+    type: DataTypes.CHAR(3),
     allowNull: false
   },
   cobrador_id: {

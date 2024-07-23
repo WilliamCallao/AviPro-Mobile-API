@@ -105,7 +105,7 @@
     "fecha_registro": "2021-08-31"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "02",
     "cuenta": "1120102E004",
     "fecha": "2024-01-01",
@@ -120,7 +120,7 @@
     "fecha_registro": "2023-08-31"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "02",
     "cuenta": "11201010212",
     "fecha": "2024-01-01",
@@ -135,7 +135,7 @@
     "fecha_registro": "2021-08-31"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "02",
     "cuenta": "11201010212",
     "fecha": "2024-01-01",
@@ -150,7 +150,7 @@
     "fecha_registro": "2021-08-31"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "02",
     "cuenta": "11201010212",
     "fecha": "2024-01-01",
@@ -165,7 +165,7 @@
     "fecha_registro": "2021-08-31"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "02",
     "cuenta": "11201010212",
     "fecha": "2024-01-01",
@@ -180,7 +180,7 @@
     "fecha_registro": "2021-08-31"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "02",
     "cuenta": "11201010212",
     "fecha": "2024-01-01",
@@ -195,7 +195,7 @@
     "fecha_registro": "2021-08-31"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "02",
     "cuenta": "11201010212",
     "fecha": "2024-01-01",
@@ -210,7 +210,7 @@
     "fecha_registro": "2022-08-31"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "02",
     "cuenta": "1120102E004",
     "fecha": "2024-01-01",
@@ -225,7 +225,7 @@
     "fecha_registro": "2022-11-30"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "01",
     "cuenta": "11201020427",
     "fecha": "2024-01-01",
@@ -240,7 +240,7 @@
     "fecha_registro": "2021-07-15"
   },
   {
-    "empresa_id": "01",
+    "empresa_id": "001",
     "sucursal_id": "01",
     "cuenta": "11201020427",
     "fecha": "2024-01-03",
