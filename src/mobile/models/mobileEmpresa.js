@@ -4,7 +4,7 @@ const sequelize = require('../../configs/database');
 
 const MobileEmpresa = sequelize.define('MobileEmpresa', {
   empresa_id: {
-    type: DataTypes.CHAR(2),
+    type: DataTypes.CHAR(3),
     allowNull: false,
     unique: true,
     primaryKey: true

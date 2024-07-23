@@ -18,19 +18,19 @@
       "tipo": "B"
     },
     {
-      "empresa_id": "01",
+      "empresa_id": "001",
       "cuenta": "1110201S001",
       "descripcion": "BCO. BISA CTA. Nº 4454770019 Bs",
       "tipo": "B"
     },
     {
-      "empresa_id": "01",
+      "empresa_id": "001",
       "cuenta": "11101010002",
       "descripcion": "EFECTIVO A RENDIR",
       "tipo": "E"
     },
     {
-      "empresa_id": "01",
+      "empresa_id": "001",
       "cuenta": "11101010001",
       "descripcion": "CAJA GENERAL DE EFECTIVO",
       "tipo": "E"

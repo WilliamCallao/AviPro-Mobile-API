@@ -8,7 +8,7 @@ const NotasCobradasMobile = sequelize.define('NotasCobradasMobile', {
     primaryKey: true
   },
   empresa_id: {
-    type: DataTypes.CHAR(2),
+    type: DataTypes.CHAR(3),
     allowNull: false
   },
   sucursal_id: {

@@ -5,7 +5,7 @@ const MobileEmpresa = require('./mobileEmpresa');
 
 const MobileDispositivo = sequelize.define('MobileDispositivo', {
   empresa_id: {
-    type: DataTypes.CHAR(2),
+    type: DataTypes.CHAR(3),
     allowNull: false,
     references: {
       model: MobileEmpresa,

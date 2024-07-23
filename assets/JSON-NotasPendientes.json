@@ -1,6 +1,6 @@
 [
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "01",
         "cuenta": "11201020427",
         "fecha": "2024-01-03",
@@ -13,7 +13,7 @@
         "nro_factura": 8871
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "01",
         "cuenta": "11201010470",
         "fecha": "2024-01-01",
@@ -26,7 +26,7 @@
         "nro_factura": 9809
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "01",
         "cuenta": "11201020427",
         "fecha": "2024-01-01",
@@ -39,7 +39,7 @@
         "nro_factura": 7733
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "1120102E004",
         "fecha": "2024-01-01",
@@ -52,7 +52,7 @@
         "nro_factura": 4432
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010212",
         "fecha": "2024-01-01",
@@ -65,7 +65,7 @@
         "nro_factura": 5317
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "1120102E004",
         "fecha": "2024-01-01",
@@ -78,7 +78,7 @@
         "nro_factura": 3672
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010212",
         "fecha": "2024-01-01",
@@ -91,7 +91,7 @@
         "nro_factura": 4433
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010212",
         "fecha": "2024-01-01",
@@ -104,7 +104,7 @@
         "nro_factura": 1362
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010212",
         "fecha": "2024-01-01",
@@ -117,7 +117,7 @@
         "nro_factura": 8812
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010212",
         "fecha": "2024-01-01",
@@ -299,7 +299,7 @@
         "nro_factura": 5076
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "112010290020002",
         "fecha": "2024-01-15",
@@ -312,7 +312,7 @@
         "nro_factura": 1632
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "112010290020002",
         "fecha": "2024-01-18",
@@ -325,7 +325,7 @@
         "nro_factura": 5591
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "112010290020002",
         "fecha": "2024-01-23",
@@ -338,7 +338,7 @@
         "nro_factura": 850
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "112010290020002",
         "fecha": "2024-02-08",
@@ -390,7 +390,7 @@
         "nro_factura": 416
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010137",
         "fecha": "2024-01-01",
@@ -403,7 +403,7 @@
         "nro_factura": 6650
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010137",
         "fecha": "2024-01-01",
@@ -416,7 +416,7 @@
         "nro_factura": 7921
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010137",
         "fecha": "2024-01-01",
@@ -429,7 +429,7 @@
         "nro_factura": 9763
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010137",
         "fecha": "2024-01-01",
@@ -442,7 +442,7 @@
         "nro_factura": 363
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "11201010137",
         "fecha": "2024-01-01",
@@ -468,7 +468,7 @@
         "nro_factura": 216
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "112010290020006",
         "fecha": "2024-01-15",
@@ -481,7 +481,7 @@
         "nro_factura": 7742
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "112010290020006",
         "fecha": "2024-01-24",
@@ -494,7 +494,7 @@
         "nro_factura": 7361
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "02",
         "cuenta": "112010290020006",
         "fecha": "2024-01-29",
@@ -507,7 +507,7 @@
         "nro_factura": 4387
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "01",
         "cuenta": "112010290030001",
         "fecha": "2024-01-09",
@@ -520,7 +520,7 @@
         "nro_factura": 5096
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "01",
         "cuenta": "112010290030001",
         "fecha": "2024-01-01",
@@ -533,7 +533,7 @@
         "nro_factura": 2745
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "01",
         "cuenta": "112010290030001",
         "fecha": "2024-01-29",
@@ -546,7 +546,7 @@
         "nro_factura": 5000
     },
     {
-        "empresa_id": "01",
+        "empresa_id": "001",
         "sucursal_id": "01",
         "cuenta": "112010290030001",
         "fecha": "2024-02-09",

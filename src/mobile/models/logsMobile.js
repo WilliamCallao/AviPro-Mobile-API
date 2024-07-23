@@ -16,7 +16,7 @@ const LogsMobile = sequelize.define('LogsMobile', {
         defaultValue: () => moment().tz('America/La_Paz').format('YYYY-MM-DD HH:mm:ss')
     },
     empresa_id: {
-        type: DataTypes.CHAR(2),
+        type: DataTypes.CHAR(3),
         allowNull: false,
         primaryKey: true
     },

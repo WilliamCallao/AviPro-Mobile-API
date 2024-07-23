@@ -3,7 +3,7 @@ const sequelize = require('../../configs/database');
 
 const CuentaDepositoMobile = sequelize.define('CuentaDepositoMobile', {
   empresa_id: {
-    type: DataTypes.CHAR(2),
+    type: DataTypes.CHAR(3),
     allowNull: false
   },
   cuenta: {
